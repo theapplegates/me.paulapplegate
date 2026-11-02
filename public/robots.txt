@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://fieldnotes-astro-journal.vinouschair.chatgpt.site/sitemap-index.xml

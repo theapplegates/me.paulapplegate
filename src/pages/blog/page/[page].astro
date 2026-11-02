@@ -1,0 +1,8 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import BlogSection from "@/components/sections/BlogSection.astro";
+import {getCollection} from "astro:content";
+export async function getStaticPaths(){const posts=await getCollection('post');return Array.from({length:Math.ceil(posts.length/6)},(_,i)=>({params:{page:String(i+1)},props:{page:i+1}}));}
+const {page}=Astro.props;
+---
+<Layout title={`The journal, page ${page} — Living Life`} description="More fieldnotes from Living Life."><main><section class="site-container journal-page-heading"><div class="journal-eyebrow">LIVING LIFE / THE JOURNAL / PAGE {page}</div><h1>More <em>fieldnotes.</em></h1><p><a href="/blog">← Back to all entries & topics</a></p></section><BlogSection title="" listPage={true} pagination={{enable:true,currentPage:page}} postsPerPage={6}/></main></Layout>

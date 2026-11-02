@@ -1,0 +1,18 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import HeroSection from "@/components/home/HeroSection.astro";
+import BlogSection from "@/components/sections/BlogSection.astro";
+import SeparatorLine from "@/components/elements/SeparatorLine.astro";
+import Button from "@/components/ui/Button.astro";
+import { ArrowUpRight, Rss, Compass, Coffee, PencilLine } from "@lucide/astro";
+---
+<Layout title="Living Life — Fieldnotes" description="Small discoveries, open roads, and ordinary days. A journal for paying attention to it all.">
+<main>
+  <HeroSection />
+  <div class="site-container"><div class="journal-topic-strip"><span>A FEW THREADS TO FOLLOW</span><a href="/blog?topic=Everyday"><Coffee size={16}/> Everyday moments</a><a href="/blog?topic=Outdoors"><Compass size={16}/> Out & about</a><a href="/blog?topic=Making"><PencilLine size={16}/> Things in the making</a></div></div>
+  <BlogSection limit={3}/>
+  <section class="site-container journal-interlude"><SeparatorLine/><div><span class="journal-eyebrow">A SMALL REMINDER</span><p>You don’t need to go far<br />to find <em>something wonderful.</em></p><span class="journal-interlude-star" aria-hidden="true">✦</span></div><SeparatorLine/></section>
+  <section class="site-container journal-about-teaser"><div><div class="journal-eyebrow">BEHIND THE FIELDNOTES</div><h2>A space for the<br /><em>beautifully ordinary.</em></h2></div><div><p>Living Life is a place to collect the details that might otherwise slip by: a good walk, a new idea, a slower morning. Some notes are practical. Others are simply a reason to look a little closer.</p><a href="/about" class="journal-text-link">Get to know this journal <ArrowUpRight size={16}/></a></div></section>
+  <section class="site-container"><div class="journal-rss"><div><Rss size={24}/><h2>A little reading, at your own pace.</h2><p>Follow the journal in your favorite feed reader.</p></div><Button url="/rss.xml" type="fill"><Rss size={16}/> Follow via RSS</Button></div></section>
+</main>
+</Layout>

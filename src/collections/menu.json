@@ -1,0 +1,31 @@
+[
+  {
+    "name": "Home",
+    "url": "/"
+  },
+  {
+    "name": "Journal",
+    "url": "/blog"
+  },
+  {
+    "name": "Explore",
+    "children": [
+      {
+        "name": "About the journal",
+        "url": "/about"
+      },
+      {
+        "name": "Design guide",
+        "url": "/design"
+      },
+      {
+        "name": "Elements",
+        "url": "/elements"
+      },
+      {
+        "name": "RSS feed",
+        "url": "/rss.xml"
+      }
+    ]
+  }
+]

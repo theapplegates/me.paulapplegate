@@ -1,0 +1,6 @@
+---
+import Logo from "@/components/ui/Logo.astro";
+import ToTop from "@/components/widgets/ToTop.astro";
+import { ArrowUpRight } from "@lucide/astro";
+---
+<footer class="journal-footer"><div class="site-container"><div class="journal-footer-main"><div><Logo/><p>A journal for the curious.<br/>A little more room for life.</p></div><div><span class="journal-eyebrow">WANDER A LITTLE</span><a href="/blog">The journal</a><a href="/about">About this space</a><a href="/rss.xml">RSS feed</a></div><div><span class="journal-eyebrow">MADE WITH CARE</span><a href="/design">Design guide</a><a href="/elements">All elements</a><a href="https://orama.com" target="_blank" rel="noopener noreferrer">Search by Orama <ArrowUpRight size={13}/></a></div></div><div class="journal-footer-bottom"><span>© {new Date().getFullYear()} Living Life</span><span>Built with Astro · Inspired by the everyday</span><a href="https://github.com/ricocc/ricoui-astro-starter" target="_blank" rel="noopener noreferrer">Template credits ↗</a></div></div></footer><ToTop/>

@@ -1,0 +1,17 @@
+---
+import { getCollection } from "astro:content";
+import Pagination from "@/components/widgets/Pagination.astro";
+import BlogCard from "@/components/cards/BlogCard.astro";
+import { ArrowUpRight } from "@lucide/astro";
+const {title = "From the journal", description = "A few things worth slowing down for.", limit = 3, listPage = false, showViewAllButton = true, pagination = {enable:false,currentPage:1}, postsPerPage = 6} = Astro.props;
+const allPosts = (await getCollection("post")).sort((a,b)=>b.data.publishDate.valueOf()-a.data.publishDate.valueOf());
+const totalPages = Math.ceil(allPosts.length/postsPerPage);
+const offset = pagination.enable ? (pagination.currentPage-1)*postsPerPage : 0;
+const posts = pagination.enable ? allPosts.slice(offset,offset+postsPerPage) : listPage ? allPosts : allPosts.slice(0,limit);
+---
+<section class="site-container journal-list-section">
+  {title && <div class="journal-section-heading"><div><div class="journal-eyebrow">THE LATEST ENTRIES</div><h2>{title}</h2>{description && <p>{description}</p>}</div>{!listPage && showViewAllButton && <a href="/blog" class="journal-text-link">All fieldnotes <ArrowUpRight size={16}/></a>}</div>}
+  <div class="journal-post-list">{posts.map((post,index)=><BlogCard content={{...post.data,link:`/blog/${post.id}`}} number={offset+index+1}/>)}</div>
+  {listPage && pagination.enable && totalPages>1 && <Pagination collection="blog" currentPage={pagination.currentPage} totalPages={totalPages}/>}
+  {posts.length === 0 && <p class="py-12">The first fieldnote is on its way.</p>}
+</section>

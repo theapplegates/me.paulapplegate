@@ -1,0 +1,14 @@
+---
+import BrowserFrame from "@/components/ui/BrowserFrame.astro";
+import Layout from "@/layouts/Layout.astro";
+import AccordionItem from "@/components/ui/AccordionItem.astro";
+import SectionHeader from "@/components/elements/SectionHeader.astro";
+import Badge from "@/components/ui/Badge.astro";
+import Button from "@/components/ui/Button.astro";
+import {ArrowUpRight} from "@lucide/astro";
+---
+<Layout title="About this space — Living Life" description="A journal for slowing down, staying curious, and noticing the everyday."><main>
+<section class="site-container journal-page-heading"><Badge variant="accent">A NOTE ABOUT THIS SPACE</Badge><h1>Life is in <em>the details.</em></h1><p>Living Life is a place to pay a little more attention.</p></section>
+<section class="site-container journal-about-teaser"><BrowserFrame url="Living Life / a window to the outdoors"><img class="journal-about-photo" src="/assets/journal/forest.jpg" width="800" height="600" alt="Sunlight filtering through a green forest"/></BrowserFrame><div><div class="journal-eyebrow">THE IDEA BEHIND FIELDNOTES</div><h2>Stay curious.<br/>Leave room for wonder.</h2><p>A journal can be a collection of small things: a walk without a destination, an idea scribbled down before it disappears, a question that leads somewhere unexpected.</p><p>That’s the spirit of Living Life. Everyday moments, the outdoors, and things in the making. A place for useful discoveries and the pleasure of noticing.</p><p class="journal-sample-note">The first entries are sample fieldnotes to introduce the journal. The original template guides are also kept in the archive.</p><Button url="/blog" type="fill">Find something to read <ArrowUpRight size={16}/></Button></div></section>
+<section class="inner-container my-16"><SectionHeader title="Make yourself at home"/><AccordionItem question="What will I find here?" answer="Fieldnotes on everyday rituals, getting outside, making things, and finding a little room to think. Browse the journal by topic or search for whatever is on your mind."/><AccordionItem question="Can I change how the journal looks?" answer="Absolutely. The palette button in the header offers ten themes, and the sun or moon button changes light and dark mode. Your choices stay with you as you browse."/><AccordionItem question="How can I follow new entries?" answer='Use the <a href="/rss.xml">RSS feed</a> in your favorite reader. It updates when new posts are published, without requiring an account.'/><AccordionItem question="How do I search?" answer="Choose Search in the header or press Command K (Control K on Windows). Search looks through the titles, topics, and full text of every published fieldnote, using Orama."/></section>
+</main></Layout>

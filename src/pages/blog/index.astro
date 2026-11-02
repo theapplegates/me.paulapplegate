@@ -1,0 +1,32 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import BlogSection from "@/components/sections/BlogSection.astro";
+import { Search, ArrowUpRight } from "@lucide/astro";
+import { getCollection } from "astro:content";
+import BlogCard from "@/components/cards/BlogCard.astro";
+const posts = (await getCollection('post')).sort((a,b)=>b.data.publishDate.valueOf()-a.data.publishDate.valueOf());
+const topics = [...new Set(posts.flatMap(p=>p.data.tags || []))];
+---
+<Layout title="The journal — Living Life" description="Fieldnotes on everyday moments, the outdoors, making things, and staying curious."><main>
+<section class="site-container journal-page-heading"><div class="journal-eyebrow">LIVING LIFE / THE JOURNAL</div><h1>Fieldnotes <em>from life.</em></h1><p>Small stories, fresh perspectives, and things worth keeping.</p></section>
+<section class="site-container journal-archive-tools"><button type="button" data-search-open class="journal-search-bar"><Search size={19}/><span>Find a thought, a place, a little inspiration…</span><kbd>⌘ K</kbd></button><div class="journal-topic-filters" aria-label="Filter articles by topic"><button data-topic="" aria-pressed="true">All entries <span>{posts.length}</span></button>{topics.map(topic=><button data-topic={topic} aria-pressed="false">{topic}</button>)}</div></section>
+<div id="archive-default"><BlogSection title="" listPage={true} pagination={{enable:true,currentPage:1}} postsPerPage={6}/></div>
+<section id="archive-filtered" class="site-container" hidden><p id="filter-count" class="journal-filter-count" aria-live="polite"></p><div class="journal-post-list">{posts.map(post=><div data-post-topics={JSON.stringify(post.data.tags || [])}><BlogCard content={{...post.data,link:`/blog/${post.id}`}}/></div>)}</div></section>
+<section class="site-container journal-archive-end"><p>There’s always something new to notice.</p><a href="/rss.xml" class="journal-text-link">Keep up with the journal <ArrowUpRight size={16}/></a></section>
+</main></Layout>
+<script>
+const buttons = document.querySelectorAll<HTMLButtonElement>('[data-topic]');
+function filter(topic: string) {
+  const known = [...buttons].some(b=>b.dataset.topic === topic);
+  if (!known) topic = '';
+  buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.topic===topic)));
+  document.getElementById('archive-default')!.hidden = !!topic;
+  document.getElementById('archive-filtered')!.hidden = !topic;
+  let count = 0;
+  document.querySelectorAll<HTMLElement>('[data-post-topics]').forEach(row=>{const visible=JSON.parse(row.dataset.postTopics || '[]').includes(topic); row.hidden=!visible;if(visible) count++;});
+  document.getElementById('filter-count')!.textContent = `${count} ${count===1?'entry':'entries'} in ${topic}`;
+}
+buttons.forEach(button=>button.addEventListener('click',()=>{const topic=button.dataset.topic || '';const url=new URL(location.href);topic?url.searchParams.set('topic',topic):url.searchParams.delete('topic');history.pushState({},'',url);filter(topic);}));
+window.addEventListener('popstate',()=>filter(new URLSearchParams(location.search).get('topic')||''));
+filter(new URLSearchParams(location.search).get('topic')||'');
+</script>

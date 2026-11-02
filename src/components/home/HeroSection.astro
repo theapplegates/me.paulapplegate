@@ -1,0 +1,18 @@
+---
+import Button from "@/components/ui/Button.astro";
+import Badge from "@/components/ui/Badge.astro";
+import { ArrowUpRight, ArrowDown } from "@lucide/astro";
+---
+<section class="site-container journal-hero">
+  <div class="journal-hero-copy">
+    <div class="journal-eyebrow"><span class="journal-dot"></span> FIELDNOTES / LIVING LIFE</div>
+    <h1>A little more life.<br /><em>A little less hurry.</em></h1>
+    <p>Small discoveries. Open roads. Ordinary days.<br class="hidden md:block" /> A journal for paying attention to it all.</p>
+    <div class="journal-hero-actions"><Button url="/blog" type="fill">Explore the journal <ArrowUpRight size={17}/></Button><a class="journal-text-link" href="/about">A note about this space <ArrowUpRight size={15}/></a></div>
+    <div class="journal-hero-note"><ArrowDown size={15}/><span>Good things are worth noticing.</span></div>
+  </div>
+  <figure class="journal-hero-figure">
+    <div class="journal-photo-wrap"><img src="/assets/journal/lake.jpg" width="1400" height="933" alt="An alpine lake reflecting mountains and a quiet lakeside cabin" fetchpriority="high" /><span class="journal-photo-stamp">TAKE THE<br /><em>scenic route.</em></span></div>
+    <figcaption><span>01 / A MOMENT OF STILLNESS</span><Badge variant="primary" size="sm">The everyday, observed</Badge></figcaption>
+  </figure>
+</section>

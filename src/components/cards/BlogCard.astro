@@ -1,0 +1,18 @@
+---
+import OptimizedImage from "@/components/widgets/OptimizedImage.astro";
+import { ArrowUpRight } from "@lucide/astro";
+const { content, number } = Astro.props;
+const { title, description, publishDate, tags = [], img, img_alt, read, link, slug, id } = content;
+const postLink = link || `/blog/${slug || id}`;
+const date = new Date(publishDate);
+---
+<article class="journal-post-row">
+  <a href={postLink} class="journal-post-image" tabindex="-1" aria-hidden="true">{img ? <OptimizedImage src={img} alt={img_alt || ''} width={320} height={240} loading="lazy" /> : <span aria-hidden="true">✦</span>}</a>
+  <div class="journal-post-copy">
+    <div class="journal-post-meta"><span>{tags[0] || 'Fieldnotes'}</span><span aria-hidden="true">/</span><time datetime={date.toISOString()}>{date.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'})}</time>{read && <><span aria-hidden="true">/</span><span>{read} min read</span></>}</div>
+    <h2><a href={postLink}>{title}</a></h2>
+    <p>{description}</p>
+    <a href={postLink} class="journal-read-more" aria-label={`Read more: ${title}`}>Read more <ArrowUpRight size={15}/></a>
+  </div>
+  {number && <span class="journal-post-number" aria-hidden="true">{String(number).padStart(2,'0')}</span>}
+</article>
