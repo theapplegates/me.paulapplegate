@@ -98,6 +98,15 @@ kbd { font:10px var(--font-sans); color:var(--color-text-tertiary); padding:3px 
 .journal-search-result:hover,.journal-search-result:focus { background:var(--color-primary-bg); }
 .journal-search-result strong { display:block; font:25px/1.2 var(--font-brand); color:var(--color-text-primary); }
 .journal-search-result span { display:block; font-size:12px; margin-top:7px; line-height:1.65; }
+.journal-search-result mark {
+  background:rgba(var(--color-primary-rgb),.18);
+  color:inherit;
+  border-radius:3px;
+  box-shadow:inset 0 -2px 0 var(--color-primary);
+  padding:0 .08em;
+  box-decoration-break:clone;
+  -webkit-box-decoration-break:clone;
+}
 .journal-search-result small { display:block; font-size:10px; color:var(--color-text-tertiary); margin-top:8px; }
 .journal-search-footer { display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; padding:13px 20px; border-top:1px solid var(--journal-line); color:var(--color-text-tertiary); font-size:10px; }
 .journal-search-footer a { color:var(--color-primary); }

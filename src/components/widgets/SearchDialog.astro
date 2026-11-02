@@ -9,6 +9,7 @@ import { Search, X } from "@lucide/astro";
 </dialog>
 <script>
 import { create, insertMultiple, search } from '@orama/orama';
+import { appendHighlighted, createMatcher, resultPreview } from '@/lib/search-highlights';
 type Entry = {id:string;title:string;description:string;tags:string;body:string;url:string;date:string;read:number};
 const dialog=document.querySelector<HTMLDialogElement>('#journal-search')!;
 const input=document.querySelector<HTMLInputElement>('#journal-search-input')!;
@@ -31,7 +32,8 @@ function getIndex(){
   })().catch(error=>{indexPromise=undefined;throw error;});
   return indexPromise;
 }
-function render(entries:Entry[],term:string,count:number){
+function render(entries:Entry[],term:string,count:number,tokenize:(text:string)=>string[]){
+  const matches=createMatcher(term,tokenize);
   results.replaceChildren();
   status.textContent=term ? `${count} ${count===1?'fieldnote':'fieldnotes'} found${count>20?' · showing the first 20':''}` : 'A few fieldnotes to get you started';
   if(!entries.length){
@@ -39,9 +41,9 @@ function render(entries:Entry[],term:string,count:number){
   }
   for(const entry of entries){
     const li=document.createElement('li');const a=document.createElement('a');a.href=entry.url;a.className='journal-search-result';
-    const title=document.createElement('strong');title.textContent=entry.title;
-    const summary=document.createElement('span');summary.textContent=entry.description;
-    const meta=document.createElement('small');meta.textContent=`${entry.tags} · ${entry.read} min read`;
+    const title=document.createElement('strong');appendHighlighted(title,entry.title,matches(entry.title));
+    const summary=document.createElement('span');const preview=term ? resultPreview(entry.description,entry.body,matches) : entry.description;appendHighlighted(summary,preview,matches(preview));
+    const meta=document.createElement('small');appendHighlighted(meta,entry.tags,matches(entry.tags));meta.append(document.createTextNode(` · ${entry.read} min read`));
     a.append(title,summary,meta);li.append(a);results.append(li);
   }
 }
@@ -50,10 +52,11 @@ async function runSearch(){
   try {
     const {db,entries}=await getIndex();
     if(id!==requestId || !dialog.open) return;
-    if(!term){render(entries.slice(0,4),'',entries.length);return;}
+    const tokenize=(text:string)=>db.tokenizer.tokenize(text);
+    if(!term){render(entries.slice(0,4),'',entries.length,tokenize);return;}
     const match=await search(db,{term,properties:['title','description','tags','body'],boost:{title:4,tags:3,description:2},tolerance:term.length>3?1:0,limit:20,threshold:0});
     if(id!==requestId || !dialog.open) return;
-    render(match.hits.map(hit=>hit.document as Entry),term,match.count);
+    render(match.hits.map(hit=>hit.document as Entry),term,match.count,tokenize);
   } catch {
     if(id!==requestId || !dialog.open) return;
     results.replaceChildren();status.textContent='Search couldn’t load. Please try again, or browse the journal.';retry.hidden=false;
