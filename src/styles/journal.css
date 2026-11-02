@@ -116,3 +116,8 @@ kbd { font:10px var(--font-sans); color:var(--color-text-tertiary); padding:3px 
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after {scroll-behavior:auto!important;animation:none!important;transition:none!important;} }
 
 @media(min-width:640px) and (max-width:799px) { #header .journal-logo>span:last-child {display:none;} #header .journal-logo {gap:0;} }
+@media(max-width:380px) {
+ #header .journal-logo-sub {display:none;}
+ #header .journal-logo {font-size:22px;gap:8px;}
+ #header .journal-logo-mark {width:32px;height:32px;}
+}

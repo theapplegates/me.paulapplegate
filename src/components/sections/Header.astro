@@ -44,8 +44,19 @@ const activeThemeName = themes.find((theme) => theme.id === defaultThemeId)?.nam
     <nav
       class="relative z-30 flex flex-row-reverse justify-start w-full text-sm sm:justify-end text-neutral-500 dark:text-neutral-400 sm:flex-row sm:items-center"
     >
-      <!-- Mobile Menu Toggle Buttons -->
-      <div class="flex items-center gap-2 sm:hidden">
+      <!-- Mobile Header Actions -->
+      <div class="flex shrink-0 items-center gap-2 sm:hidden">
+        <button
+          type="button"
+          data-search-open
+          aria-label="Search the journal"
+          aria-haspopup="dialog"
+          aria-controls="journal-search"
+          class="flex items-center justify-center w-10 h-10 cursor-pointer rounded-full bg-gradient-to-b from-white to-bg-primary-light border-[0.5px] border-primary/10 dark:from-neutral-800 dark:to-bg-secondary-dark dark:border-neutral-600 transition-all duration-200 hover:shadow-md active:scale-95"
+        >
+          <Search class="w-5 h-5 text-neutral-700 dark:text-neutral-200" aria-hidden="true" />
+        </button>
+
         <!-- Dark Mode Toggle (Mobile) -->
         <div
           id="darkToggleMobile"
@@ -180,10 +191,6 @@ const activeThemeName = themes.find((theme) => theme.id === defaultThemeId)?.nam
         </div>
         )}
 
-        <!-- CTA Button (Mobile) -->
-        <div class="relative z-10 w-full px-5 mt-3 sm:hidden">
-          <button type="button" data-search-open class="journal-search-trigger" aria-label="Search the journal"><Search size={17} /><span>Search</span><kbd>⌘ K</kbd></button>
-        </div>
       </div>
 
       <!-- Desktop Actions -->
