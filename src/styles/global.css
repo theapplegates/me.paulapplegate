@@ -9,6 +9,18 @@
 @config "../../tailwind.config.mjs";
 
 
+
+ /* Markdown images share the same responsive picture pipeline. */
+.cloudinary-picture {
+  display: block;
+}
+
+.cloudinary-picture img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* Define theme font mappings */
 @theme {
   --font-brand: "Instrument Serif", ui-sans-serif, system-ui, Noto Sans SC, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";

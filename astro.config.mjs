@@ -2,30 +2,39 @@ import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
+import { unified } from "@astrojs/markdown-remark";
 import { fileURLToPath } from "url";
 import path from "path";
+import rehypeCloudinaryPicture from "./src/plugins/rehype-cloudinary-picture.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-// Get the site URL from environment variables, or use the default value if not set
-// Note: After the first deployment, be sure to set the correct PUBLIC_SITE_URL in the .env file
-const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://fieldnotes-astro-journal.vinouschair.chatgpt.site';
+const siteUrl = import.meta.env.PUBLIC_SITE_URL || "https://paulapplegate.com";
 
 // https://astro.build/config
 export default defineConfig({
   site: siteUrl,
-  base: '/',
-  envPrefix: 'PUBLIC_',
+  base: "/",
+  envPrefix: "PUBLIC_",
+
+  markdown: {
+    processor: unified({
+      rehypePlugins: [
+        [rehypeCloudinaryPicture, { cloudName: process.env.PUBLIC_CLOUDINARY_CLOUD_NAME }],
+      ],
+    }),
+  },
+
   vite: {
     plugins: [tailwindcss()],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, './src')
-      }
-    }
+        "@": path.resolve(__dirname, "./src"),
+      },
+    },
   },
 
   server: {
-    host: '127.0.0.1',
+    host: "127.0.0.1",
     port: 4327,
   },
 

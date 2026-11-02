@@ -1,0 +1,64 @@
+{
+  "paulapplegate-com/images/blog/sayan-nath-SmR2A69YuI4-unsplash": {
+    "publicId": "images/blog/sayan-nath-SmR2A69YuI4-unsplash",
+    "cloudName": "paulapplegate-com",
+    "width": 2160,
+    "height": 3840,
+    "version": 1793590395,
+    "sizes": "(max-width: 720px) calc(100vw - 3rem), 672px",
+    "widths": {
+      "jxl": [
+        50,
+        302,
+        458,
+        598,
+        627,
+        1095,
+        1111,
+        1183,
+        1297,
+        1391,
+        1467,
+        1584,
+        1662,
+        1744,
+        1753,
+        1856,
+        1920
+      ],
+      "avif": [
+        50,
+        349,
+        515,
+        709,
+        867,
+        1079,
+        1235,
+        1515,
+        1819,
+        1920
+      ],
+      "webp": [
+        50,
+        308,
+        417,
+        529,
+        636,
+        745,
+        785,
+        813,
+        1085,
+        1142,
+        1144,
+        1261,
+        1456,
+        1584,
+        1639,
+        1727,
+        1794,
+        1871,
+        1920
+      ]
+    }
+  }
+}
