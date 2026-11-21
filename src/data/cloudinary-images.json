@@ -207,5 +207,47 @@
     "width": 6000,
     "height": 3375,
     "version": 1794711739
+  },
+  "paulapplegate-com/images/blog/Game_Title__b": {
+    "publicId": "images/blog/Game_Title__b",
+    "cloudName": "paulapplegate-com",
+    "width": 2528,
+    "height": 1696,
+    "version": 1795304350,
+    "widths": {
+      "jxl": [
+        50,
+        473,
+        738,
+        943,
+        1301,
+        1335,
+        1508,
+        1720,
+        1853,
+        1920
+      ],
+      "avif": [
+        50,
+        386,
+        940,
+        1312,
+        1757,
+        1920
+      ],
+      "webp": [
+        50,
+        339,
+        478,
+        860,
+        1081,
+        1268,
+        1462,
+        1612,
+        1782,
+        1913,
+        1920
+      ]
+    }
   }
 }
