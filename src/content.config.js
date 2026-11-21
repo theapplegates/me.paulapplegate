@@ -12,6 +12,9 @@ const post = defineCollection({
 		tags: z.array(z.string()).optional(),
 		img: z.string().optional(),
 		img_alt: z.string().optional(),
+		coverImage: z.string().optional(),
+		coverCloudName: z.string().optional(),
+		coverAlt: z.string().optional(),
 		featured: z.boolean().optional(),
 	}),
 });

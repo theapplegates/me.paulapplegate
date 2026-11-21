@@ -41,9 +41,9 @@ test("picture order and fallback are explicit, with aligned responsive crops", (
   });
   assert.deepEqual(
     picture.sources.map((s) => s.type),
-    ["image/jxl", "image/avif", "image/webp"],
+    ["image/jxl", "image/avif"],
   );
-  for (const [index, format] of ["jxl", "avif", "webp"].entries()) {
+  for (const [index, format] of ["jxl", "avif"].entries()) {
     const source = picture.sources[index];
     assert.equal(source.sizes, "50vw");
     assert.match(
@@ -54,7 +54,8 @@ test("picture order and fallback are explicit, with aligned responsive crops", (
     assert.doesNotMatch(source.srcset, /f_auto/);
   }
   assert.match(picture.img.src, /f_webp,/);
-  assert.equal(picture.img.srcset, picture.sources[2].srcset);
+  assert.match(picture.img.srcset, /f_webp,q_auto,w_400,h_225,c_fill,g_auto.* 400w/);
+  assert.match(picture.img.srcset, /f_webp,q_auto,w_800,h_450,c_fill,g_auto.* 800w$/);
   assert.equal(picture.img.width, 1600);
   assert.equal(picture.img.height, 900);
 });
@@ -79,7 +80,7 @@ test("saved format-specific widths, dimensions, sizes and version are consumed w
     assert.equal(picture.img.sizes, "75vw");
     assert.match(picture.sources[0].srcset, / 200w, .* 700w$/);
     assert.match(picture.sources[1].srcset, / 300w, .* 800w$/);
-    assert.match(picture.sources[2].srcset, / 320w, .* 960w$/);
+    assert.match(picture.img.srcset, / 320w, .* 960w$/);
     assert.match(picture.img.src, /\/v12345\/blog\/test$/);
     assert.throws(() => getPictureData("blog/test", { cloudName: "other-cloud" }), /width must/);
     const override = getPictureData("blog/test", { cloudName: "test-cloud", widths: [400, 800] });
@@ -132,6 +133,8 @@ test("MDX JSX form of the custom tag is transformed like the HTML form", () => {
             { type: "mdxJsxAttribute", name: "cloud-name", value: "test-cloud" },
             { type: "mdxJsxAttribute", name: "alt", value: "A test photo" },
             { type: "mdxJsxAttribute", name: "grayscale" },
+            { type: "mdxJsxAttribute", name: "loading", value: "eager" },
+            { type: "mdxJsxAttribute", name: "fetchpriority", value: "high" },
           ],
         },
       ],
@@ -142,6 +145,10 @@ test("MDX JSX form of the custom tag is transformed like the HTML form", () => {
     assert.equal(img.properties.alt, "A test photo");
     assert.match(img.properties.src, /cloudinary.com\/test-cloud\//);
     assert.match(img.properties.src, /e_grayscale/);
+    assert.equal(img.properties.loading, "eager");
+    assert.equal(img.properties.fetchPriority, "high");
+    assert.equal(img.properties.sizes, "75vw");
+    assert.equal(tree.children[0].children[0].properties.sizes, "75vw");
   } finally {
     delete manifest["test-cloud/blog/test"];
   }
@@ -153,7 +160,9 @@ test("Markdown shorthand uses manifest data; missing metadata reports an actiona
     const tree = fromHtml('<p><img src="cloudinary:blog/test" alt="Test"></p>', { fragment: true });
     rehypeCloudinaryPicture({ cloudName: "test-cloud" })(tree, failFile);
     assert.equal(tree.children[0].children[0].tagName, "picture");
-    assert.equal(tree.children[0].children[0].children.at(-1).properties.sizes, "75vw");
+    for (const imagePart of tree.children[0].children[0].children) {
+      assert.equal(imagePart.properties.sizes, "auto, 75vw");
+    }
     const invalid = fromHtml('<img src="cloudinary:missing" alt="Missing">', { fragment: true });
     assert.throws(
       () => rehypeCloudinaryPicture()(invalid, failFile),

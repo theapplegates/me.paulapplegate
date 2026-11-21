@@ -39,10 +39,15 @@ function picture(properties, cloudName) {
   }
   if (properties.widths) options.widths = String(properties.widths).split(",").map(Number);
   if (properties.grayscale !== undefined) options.grayscale = properties.grayscale !== "false";
-  const data = getPictureData(src, options);
   const loading = properties.loading || "lazy";
   if (!["lazy", "eager"].includes(loading)) throw new Error("Image loading must be lazy or eager.");
+  const fetchPriority = properties.fetchPriority ?? properties.fetchpriority;
+  if (fetchPriority !== undefined && !["high", "low", "auto"].includes(fetchPriority)) {
+    throw new Error("Image fetchpriority must be high, low, or auto.");
+  }
+  const data = getPictureData(src, { ...options, loading });
   const attributes = { ...data.img, alt: String(properties.alt), loading, decoding: "async" };
+  if (fetchPriority !== undefined) attributes.fetchPriority = fetchPriority;
   if (properties.className) attributes.className = properties.className;
   if (properties.title) attributes.title = properties.title;
   return element("picture", { className: ["cloudinary-picture"] }, [
@@ -66,7 +71,9 @@ export default function rehypeCloudinaryPicture({ cloudName } = {}) {
             index += fragment.children.length - 1;
           } else if (
             isCloudinaryTag(node) ||
-            (node.type === "element" && String(node.properties.src).startsWith("cloudinary:"))
+            (node.type === "element" &&
+              node.tagName === "img" &&
+              String(node.properties.src).startsWith("cloudinary:"))
           ) {
             parent.children[index] = picture(propertiesOf(node), cloudName);
           } else {

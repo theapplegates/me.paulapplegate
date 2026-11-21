@@ -24,7 +24,7 @@ const {
   fetchpriority = "auto",
   ...options
 } = Astro.props;
-const { sources, img } = getPictureData(publicId, options);
+const { sources, img } = getPictureData(publicId, { ...options, loading });
 // Forward Astro's scoped-style attributes to the image as well as its wrapper.
 const scope = Object.fromEntries(
   Object.entries(Astro.props).filter(([key]) => key.startsWith("data-astro-cid-")),

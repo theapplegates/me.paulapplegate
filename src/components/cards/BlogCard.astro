@@ -1,13 +1,39 @@
 ---
 import OptimizedImage from "@/components/widgets/OptimizedImage.astro";
+import CloudinaryImage from "@/components/CloudinaryImage.astro";
 import { ArrowUpRight } from "@lucide/astro";
 const { content, number } = Astro.props;
-const { title, description, publishDate, tags = [], img, img_alt, read, link, slug, id } = content;
+const { title, description, publishDate, tags = [], img, img_alt, coverImage, coverCloudName, coverAlt, read, link, slug, id } = content;
+const localCover = img || (coverImage?.startsWith("/") ? coverImage : undefined);
+const imageWidths = [112, 168, 224, 320, 336, 480];
+const imageSizes = "(max-width: 767px) 111px, 162px";
 const postLink = link || `/blog/${slug || id}`;
 const date = new Date(publishDate);
 ---
 <article class="journal-post-row">
-  <a href={postLink} class="journal-post-image" tabindex="-1" aria-hidden="true">{img ? <OptimizedImage src={img} alt={img_alt || ''} width={320} height={240} loading="lazy" /> : <span aria-hidden="true">✦</span>}</a>
+  <a href={postLink} class="journal-post-image" tabindex="-1" aria-hidden="true">
+    {localCover ? (
+      <OptimizedImage
+        src={localCover}
+        alt={img_alt || coverAlt || ""}
+        width={480}
+        height={360}
+        widths={imageWidths}
+        sizes={imageSizes}
+        loading="lazy"
+      />
+    ) : coverImage ? (
+      <CloudinaryImage
+        publicId={coverImage}
+        cloudName={coverCloudName}
+        alt={coverAlt || ""}
+        width={480}
+        height={360}
+        widths={imageWidths}
+        sizes={imageSizes}
+      />
+    ) : <span aria-hidden="true">✦</span>}
+  </a>
   <div class="journal-post-copy">
     <div class="journal-post-meta"><span>{tags[0] || 'Fieldnotes'}</span><span aria-hidden="true">/</span><time datetime={date.toISOString()}>{date.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'})}</time>{read && <><span aria-hidden="true">/</span><span>{read} min read</span></>}</div>
     <h2><a href={postLink}>{title}</a></h2>

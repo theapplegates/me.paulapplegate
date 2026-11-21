@@ -4,7 +4,7 @@ import { existsSync } from 'node:fs';
 import { parseEnv, parseArgs } from 'node:util';
 import { dirname, resolve, relative, extname, basename, isAbsolute } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { DEFAULT_CLOUD, FORMATS, PROSE_SIZES, normalizeWidths } from '../src/lib/cloudinary-core.mjs';
+import { DEFAULT_CLOUD, FORMATS, normalizeWidths } from '../src/lib/cloudinary-core.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const manifestPath = resolve(root, 'src/data/cloudinary-images.json');
@@ -108,14 +108,15 @@ export async function main(args = process.argv.slice(2)) {
   } catch (error) {
     throw new Error(String(error.message).replaceAll(apiSecret, '[redacted]').replaceAll(apiKey, '[redacted]'));
   }
-  const asset = assetFromResponse(result, cloudName, values.sizes || PROSE_SIZES);
+  const asset = assetFromResponse(result, cloudName, values.sizes);
   const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
   manifest[`${cloudName}/${asset.publicId}`] = asset;
   const temporary = `${manifestPath}.${process.pid}.tmp`;
   await writeFile(temporary, JSON.stringify(manifest, null, 2) + '\n');
   await rename(temporary, manifestPath);
   console.log('Saved src/data/cloudinary-images.json. Paste this into a Markdown post:\n');
-  console.log(`<cloudinary-picture src="${escapeAttribute(asset.publicId)}" cloud-name="${cloudName}" alt="${escapeAttribute(values.alt ?? 'Describe this image')}" width="${asset.width}" height="${asset.height}" sizes="${escapeAttribute(asset.sizes)}"></cloudinary-picture>`);
+  const sizes = asset.sizes ? ` sizes="${escapeAttribute(asset.sizes)}"` : '';
+  console.log(`<cloudinary-picture src="${escapeAttribute(asset.publicId)}" cloud-name="${cloudName}" alt="${escapeAttribute(values.alt ?? 'Describe this image')}" width="${asset.width}" height="${asset.height}"${sizes}></cloudinary-picture>`);
   console.log(`\nFor a post cover, use:\ncoverImage: ${JSON.stringify(asset.publicId)}\ncoverAlt: ${JSON.stringify(values.alt ?? 'Describe this image')}\ncoverCloudName: ${JSON.stringify(cloudName)}`);
 }
 

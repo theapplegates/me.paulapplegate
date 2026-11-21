@@ -2,8 +2,14 @@ import manifest from "../data/cloudinary-images.json" with { type: "json" };
 
 export const DEFAULT_CLOUD = "paulapplegate-com";
 export const FORMATS = ["jxl", "avif", "webp"];
-export const DEFAULT_WIDTHS = [320, 480, 640, 800, 960, 1280, 1600, 1920];
-export const PROSE_SIZES = "(max-width: 720px) calc(100vw - 3rem), 672px";
+export const DEFAULT_WIDTHS = [320, 400, 480, 640, 800, 960, 1120, 1280, 1600, 1920];
+// Match the 1200px container and TOC spacing. Approximate the article's font-dependent ch caps in rem.
+export const PROSE_SIZES = [
+  "(min-width: 80rem) calc(1200px - 18.5rem)",
+  "(width > 1024px) min(57rem, calc(100vw - 15rem))",
+  "(min-width: 768px) 44rem",
+  "calc(100vw - 2rem)",
+].join(", ");
 
 export function normalizeWidths(widths) {
   if (
@@ -80,7 +86,10 @@ export function getPictureData(publicId, options = {}) {
   const { asset } = identity(publicId, options.cloudName);
   const width = positiveDimension(options.width ?? asset?.width, "width");
   const height = positiveDimension(options.height ?? asset?.height, "height");
-  const sizes = options.sizes || asset?.sizes || PROSE_SIZES;
+  const slotSize = options.sizes || asset?.sizes || PROSE_SIZES;
+  const sizes = options.loading === "lazy" && !/^auto(?:\s*,|$)/i.test(slotSize)
+    ? `auto, ${slotSize}`
+    : slotSize;
   const transforms = {
     ...options,
     width,
@@ -88,7 +97,7 @@ export function getPictureData(publicId, options = {}) {
     crop: options.crop ?? "fill",
     gravity: options.gravity ?? "auto",
   };
-  const sources = FORMATS.map((format) => {
+  const [jxl, avif, webp] = FORMATS.map((format) => {
     const widths = normalizeWidths(options.widths ?? asset?.widths?.[format] ?? DEFAULT_WIDTHS);
     return {
       type: `image/${format}`,
@@ -97,10 +106,10 @@ export function getPictureData(publicId, options = {}) {
     };
   });
   return {
-    sources,
+    sources: [jxl, avif],
     img: {
       src: getImageUrl(publicId, { ...transforms, format: "webp" }),
-      srcset: sources[2].srcset,
+      srcset: webp.srcset,
       sizes,
       width,
       height,

@@ -26,7 +26,7 @@ export function getSrcSet(publicId: string, widths?: number[], options: Cloudina
 
 export function getPictureData(
   publicId: string,
-  options: CloudinaryOptions & { widths?: number[]; sizes?: string } = {},
+  options: CloudinaryOptions & { widths?: number[]; sizes?: string; loading?: "eager" | "lazy" } = {},
 ) {
   return images.getPictureData(publicId, { ...options, cloudName: options.cloudName || cloudName });
 }
