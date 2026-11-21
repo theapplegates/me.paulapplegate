@@ -1,128 +1,28 @@
 ---
-/**
- * OptimizedImage component is a modified version of Astro's built-in Image component.
- * It allows to optimize images inside public, src/assets and content folders.
- * To optimize remote images, follow: https://docs.astro.build/en/guides/images/#authorizing-remote-images
- */
+import type { ImageMetadata } from "astro";
 import { Image, Picture } from "astro:assets";
 import type { ComponentProps } from "astro/types";
 
-interface InlineSvgProps {
-  src: string;
-  inlineSvg: true;
-  alt?: string;
-  width?: number | `${number}`;
-  height?: number | `${number}`;
-  class?: string;
-  style?: any;
-  [key: string]: any;
+type Props = Omit<ComponentProps<typeof Picture>, "src"> & { src: string | ImageMetadata };
+
+const { src, formats, fallbackFormat, pictureAttributes, ...options } = Astro.props;
+
+const images = import.meta.glob<ImageMetadata>([
+  "/src/assets/**/*.{jpeg,jpg,png,avif,tiff,gif,webp,svg}",
+  "/public/**/*.{jpeg,jpg,png,avif,tiff,gif,webp,svg}",
+  "/src/content/**/*.{jpeg,jpg,png,avif,tiff,gif,webp,svg}",
+], { import: "default" });
+
+let image = src;
+if (typeof src === "string" && !/^https?:\/\//i.test(src)) {
+  const path = "/" + src.replace(/^\/+/, "");
+  const key = /^\/(public|src)\//.test(path) ? path : `/public${path}`;
+  const load = images[key];
+  if (!load) throw new Error(`Image "${src}" was not found. Check the path and filename in the post or template.`);
+  image = await load();
 }
 
-interface ImageProps {
-  src: string;
-  alt?: string;
-  width?: number | `${number}`;
-  height?: number | `${number}`;
-  loading?: "eager" | "lazy" | null | undefined;
-  decoding?: "async" | "auto" | "sync" | null | undefined;
-  format?: string[] | "auto" | "avif" | "jpeg" | "png" | "svg" | "webp";
-  formats?: ComponentProps<typeof Picture>["formats"];
-  class?: string;
-  style?: any;
-  [key: string]: any;
-}
-
-type Props = InlineSvgProps | ImageProps;
-
-// Destructuring Astro.props to get the component's props
-let {
-  src,
-  alt,
-  inlineSvg,
-  width,
-  height,
-  loading,
-  decoding,
-  format,
-  formats,
-  style,
-  ...rest
-} = Astro.props;
-
-const isRemoteImage = src.startsWith("http://") || src.startsWith("https://");
-let image = src as any;
-let SVG = "" as any;
-
-if (!isRemoteImage) {
-  // Regular Images
-  const images = import.meta.glob([
-    "/src/assets/**/*.{jpeg,jpg,png,avif,tiff,gif,webp,svg,gif}",
-    "/public/**/*.{jpeg,jpg,png,avif,tiff,gif,webp,svg,gif}",
-    "/src/content/**/*.{jpeg,jpg,png,avif,tiff,gif,webp,svg,gif}",
-  ]);
-
-  // Get Raw Image For Inline SVG
-  const imagesRaw = import.meta.glob(
-    [
-      "/src/assets/**/*.svg",
-      "/src/content/**/*.svg",
-      "/public/**/*.svg",
-    ],
-    {
-      query: "raw",
-      import: "default",
-    },
-  );
-
-  if (inlineSvg && src.includes(".svg")) {
-    const key = Object.keys(images).find((k) => k.includes(src));
-    SVG = key ? await imagesRaw[key]() : null;
-
-    if (SVG.length > 1) {
-      SVG = SVG.split("<svg"); // Split at the opening <svg> tag
-
-      if (SVG.length > 1) {
-        // Convert rest object to a string of attributes
-        const attributes = Object.entries(rest)
-          .map(([key, value]) => `${key}="${value}"`)
-          .join(" ");
-
-        // Add the attributes to the <svg> tag
-        SVG[1] = ` data-icon="true" ${attributes} ${SVG[1]}`;
-      }
-
-      // Join the array back into a string
-      SVG = SVG.join("<svg");
-    }
-  }
-
-  const key = Object.keys(images).find((k) => k.includes(src));
-  image = key ? await images[key]() : null;
-
-  image = image && image.default ? image.default : null;
-}
-
-const imageProps = {
-  style,
-  alt: alt || "",
-  width,
-  height,
-  loading,
-  decoding,
-  src: image,
-  class: Astro.props.class,
-  ...rest,
-};
+const imageProps = { ...options, src: image } as ComponentProps<typeof Image>;
 ---
 
-{
-  inlineSvg && SVG && src.includes(".svg") ? (
-    <Fragment set:html={SVG} />
-  ) : image ? (
-    formats?.length ? (
-      <Picture {...imageProps} formats={formats} />
-    ) : (
-      <Image {...imageProps} format={format} />
-    )
-  ) : null
-}
+{formats?.length ? <Picture {...imageProps} {formats} {fallbackFormat} {pictureAttributes} /> : <Image {...imageProps} />}

@@ -1,5 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { fromHtml } from "hast-util-from-html";
 import {
   getPictureData,
@@ -13,6 +16,7 @@ import {
   assetFromResponse,
   breakpointRequests,
   requestCloudinary,
+  saveAsset,
 } from "../scripts/cloudinary-breakpoints.mjs";
 
 const sample = {
@@ -53,7 +57,7 @@ test("picture order and fallback are explicit, with aligned responsive crops", (
     assert.match(source.srcset, /w_800,h_450,c_fill/);
     assert.doesNotMatch(source.srcset, /f_auto/);
   }
-  assert.match(picture.img.src, /f_webp,/);
+  assert.match(picture.img.src, /f_webp,q_auto,w_800,h_450/);
   assert.match(picture.img.srcset, /f_webp,q_auto,w_400,h_225,c_fill,g_auto.* 400w/);
   assert.match(picture.img.srcset, /f_webp,q_auto,w_800,h_450,c_fill,g_auto.* 800w$/);
   assert.equal(picture.img.width, 1600);
@@ -71,15 +75,15 @@ test("IDs are URL-encoded and invalid responsive widths are rejected", () => {
   assert.throws(() => getImageUrl("https://example.org/photo.jpg"), /public ID/);
 });
 
-test("saved format-specific widths, dimensions, sizes and version are consumed without credentials", () => {
+test("saved breakpoint ceilings, dimensions, sizes and version work without credentials", () => {
   manifest["test-cloud/blog/test"] = assetFromResponse(sample, "test-cloud", "75vw");
   try {
     const picture = getPictureData("blog/test", { cloudName: "test-cloud" });
     assert.equal(picture.img.width, 1200);
     assert.equal(picture.img.height, 800);
     assert.equal(picture.img.sizes, "75vw");
-    assert.match(picture.sources[0].srcset, / 200w, .* 700w$/);
-    assert.match(picture.sources[1].srcset, / 300w, .* 800w$/);
+    assert.match(picture.sources[0].srcset, / 320w, .* 700w$/);
+    assert.match(picture.sources[1].srcset, / 320w, .* 800w$/);
     assert.match(picture.img.srcset, / 320w, .* 960w$/);
     assert.match(picture.img.src, /\/v12345\/blog\/test$/);
     assert.throws(() => getPictureData("blog/test", { cloudName: "other-cloud" }), /width must/);
@@ -87,6 +91,52 @@ test("saved format-specific widths, dimensions, sizes and version are consumed w
     assert.match(override.sources[0].srcset, / 400w, .* 800w$/);
   } finally {
     delete manifest["test-cloud/blog/test"];
+  }
+});
+
+test("wide gaps in the analyzed widths get useful candidates without upscaling a crop", () => {
+  const original = {
+    publicId: "tall-photo",
+    cloudName: "test-cloud",
+    width: 900,
+    height: 1800,
+    version: 12345,
+    widths: { jxl: [50, 900], avif: [50, 900], webp: [50, 900] },
+  };
+  manifest["test-cloud/tall-photo"] = original;
+  try {
+    const options = { cloudName: original.cloudName };
+    const natural = getPictureData(original.publicId, { ...options, width: 400 });
+    assert.equal(natural.img.height, 800);
+    assert.match(natural.sources[1].srcset, / 320w, .* 800w, .* 900w$/);
+    assert.match(natural.img.src, /w_400,h_800/);
+    assert.ok(natural.img.srcset.includes(`${natural.img.src} 400w`));
+
+    const crop = getPictureData(original.publicId, {
+      ...options, width: 100, height: 400, widths: [640, 960],
+    });
+    assert.match(crop.sources[0].srcset, /w_450,h_1800,.* 450w$/);
+    assert.doesNotMatch(crop.sources[0].srcset, /, https:/);
+    assert.match(crop.img.src, /w_450,h_1800/);
+  } finally {
+    delete manifest["test-cloud/tall-photo"];
+  }
+});
+
+test("nearby analyzed widths are reused without skipping a common slot", () => {
+  const picture = getPictureData("images/blog/Contesttantform");
+  assert.match(picture.sources[0].srcset, / 943w, .* 1103w,/);
+  assert.match(picture.sources[1].srcset, / 960w, .* 1086w,/);
+  assert.doesNotMatch(picture.sources[0].srcset, / 1207w,/);
+  assert.match(picture.img.src, /w_949,h_/);
+});
+
+test("scale and pad do not send unsupported auto gravity", () => {
+  for (const crop of ["scale", "pad"]) {
+    const options = { width: 800, height: 600, widths: [400], crop };
+    const picture = getPictureData("photo", options);
+    assert.match(picture.img.src, new RegExp(`,c_${crop}/`));
+    assert.throws(() => getPictureData("photo", { ...options, gravity: "auto" }), /Auto gravity requires/);
   }
 });
 
@@ -179,7 +229,7 @@ test("Cloudinary analysis requests every explicit format and refuses incomplete 
     requests.map((r) => r.transformation),
     ["f_jxl,q_auto", "f_avif,q_auto", "f_webp,q_auto"],
   );
-  assert.ok(requests.every((r) => r.create_derived && r.max_width === 1920));
+  assert.ok(requests.every((r) => !r.create_derived && r.max_width === 1920));
   assert.throws(() => breakpointRequests({ minWidth: 2000, maxWidth: 1000 }), /min-width/);
   assert.throws(
     () =>
@@ -219,6 +269,27 @@ test("existing-image analysis signs a form without transmitting the API secret",
   );
   assert.ok(called);
   assert.equal(result, sample);
+});
+
+test("simultaneous asset registrations preserve unrelated assets and the newest version", async () => {
+  const folder = await mkdtemp(join(tmpdir(), "fieldnotes-manifest-"));
+  const path = join(folder, "images.json");
+  const first = assetFromResponse(sample, "test-cloud", "75vw");
+  const second = { ...first, publicId: "blog/another" };
+  try {
+    await writeFile(path, "{}");
+    await Promise.all([saveAsset(first, path), saveAsset(second, path)]);
+    const newer = { ...first, version: first.version + 1, sizes: undefined };
+    assert.equal((await saveAsset(newer, path)).sizes, "75vw");
+    await assert.rejects(saveAsset(first, path), /A newer upload/);
+    const manifestData = JSON.parse(await readFile(path, "utf8"));
+    assert.equal(manifestData["test-cloud/blog/test"].version, newer.version);
+    assert.equal(manifestData["test-cloud/blog/test"].sizes, "75vw");
+    assert.equal(manifestData["test-cloud/blog/another"].publicId, second.publicId);
+    assert.deepEqual(await readdir(folder), ["images.json"]);
+  } finally {
+    await rm(folder, { recursive: true, force: true });
+  }
 });
 
 test("social previews use JPEG separately from page picture fallbacks", () => {

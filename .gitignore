@@ -37,3 +37,6 @@ Thumbs.db
 *.tmp
 *.temp
 .cache/
+
+# Interrupted Cloudinary manifest write
+/src/data/cloudinary-images.json.lock

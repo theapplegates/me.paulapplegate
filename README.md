@@ -4,7 +4,7 @@ A complete Astro blog based on the supplied Design-led Astro Starter. The origin
 
 ## Run locally
 
-Requires Node 22.12+ and pnpm 9+.
+Requires Node 22.23.4+ and pnpm 9+. Netlify uses Node 24.
 
 ```sh
 pnpm install
@@ -16,6 +16,25 @@ Open http://127.0.0.1:4327. For production validation, run `pnpm build`; use `pn
 ## Write a post
 
 Add an MDX file in `src/content/post/<slug>/index.mdx`, following an existing post. Add a title, description, publishDate, tags, optional read time, and optional image. New posts automatically appear in the journal, pagination, RSS, and search index after a build. The four journal entries are explicitly marked as sample writing; the three original starter guides remain in the archive.
+
+## Images
+
+Use `img: "/assets/journal/photo.jpg"` and `img_alt` for a local post thumbnail. Store the file at that exact path under `public/`. For a Cloudinary thumbnail, use `coverImage` with the asset's public ID, `coverAlt`, and an optional `coverCloudName`.
+
+To register a Cloudinary asset, set `CLOUDINARY_API_KEY` and `CLOUDINARY_API_SECRET` in your local `.env.local`. Run one of these commands:
+
+```sh
+pnpm cloudinary:breakpoints src/images/blog/photo.jpg --alt="A description of the photo"
+pnpm cloudinary:breakpoints images/blog/photo --existing --alt="A description of the photo"
+```
+
+Commit the updated `src/data/cloudinary-images.json` and paste the printed tag into the post. For a registered image, you can also write `![A description](cloudinary:images/blog/photo)`. The Astro build reads the manifest without Cloudinary credentials.
+
+Cloudinary's analysis supplies suggested widths by format. For article photos, the renderer fills gaps near common display widths. Custom crops use widths suited to their placement and stay within the pixels available in the original. Versions, crops, widths, and formats are encoded in delivery URLs. The analysis command discards its temporary derivatives. Cloudinary generates the delivered variants on request.
+
+Use both `width` and `height` to set a custom crop. Use `loading="eager" fetchpriority="high"` on an article's likely LCP image. Other article images lazy-load by default. The HTML prefers JPEG XL, followed by AVIF and a responsive WebP fallback.
+
+Verify image changes with `pnpm test` and `pnpm build`.
 
 ## Search
 
@@ -31,6 +50,6 @@ OramaJS (`@orama/orama`) powers title, description, tag, and full-text search wi
 
 ## Site settings
 
-Edit `src/config/site.js` for title and description. Set PUBLIC_SITE_URL when using another domain, then rebuild. Theme settings are in `src/config/themes.js`; journal layout styles are in `src/styles/journal.css`. Original MIT license is retained. Photos are served locally, sourced from Unsplash image endpoints; template asset files are also retained.
+Edit `src/config/site.js` for title and description. Set PUBLIC_SITE_URL when using another domain, then rebuild. Theme settings are in `src/config/themes.js`; journal layout styles are in `src/styles/journal.css`. Original MIT license is retained. The journal uses local and Cloudinary-hosted photos. The original template assets are retained.
 
 The site is published privately through Sites. `.openai/hosting.json` identifies its hosting project.

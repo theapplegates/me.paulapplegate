@@ -1,7 +1,8 @@
 import { createHash } from 'node:crypto';
-import { readFile, writeFile, rename, stat } from 'node:fs/promises';
+import { readFile, writeFile, rename, stat, open, rm } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { parseEnv, parseArgs } from 'node:util';
+import { setTimeout as delay } from 'node:timers/promises';
 import { dirname, resolve, relative, extname, basename, isAbsolute } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { DEFAULT_CLOUD, FORMATS, normalizeWidths } from '../src/lib/cloudinary-core.mjs';
@@ -15,13 +16,14 @@ export function breakpointRequests({ minWidth = 50, maxWidth = 1920, bytesStep =
   }
   if (minWidth > maxWidth || maxImages < 3 || maxImages > 200) throw new Error('Require min-width <= max-width and 3–200 max-images.');
   return FORMATS.map(format => ({
-    create_derived: true, transformation: `f_${format},q_auto`,
+    create_derived: false, transformation: `f_${format},q_auto`,
     min_width: minWidth, max_width: maxWidth, bytes_step: bytesStep, max_images: maxImages,
   }));
 }
 
 export function assetFromResponse(result, cloudName, sizes) {
-  if (!result.public_id || !Number.isInteger(result.width) || result.width < 1 || !Number.isInteger(result.height) || result.height < 1 || !Number.isInteger(result.version)) {
+  const { public_id: publicId, width, height, version } = result;
+  if (!publicId || [width, height, version].some(value => !Number.isSafeInteger(value) || value < 1)) {
     throw new Error('Cloudinary did not return a public ID, dimensions and version. The local manifest was not changed.');
   }
   const widths = {};
@@ -33,7 +35,7 @@ export function assetFromResponse(result, cloudName, sizes) {
     if (!group?.breakpoints?.length) throw new Error(`Cloudinary returned no ${format.toUpperCase()} breakpoints. The local manifest was not changed.`);
     widths[format] = normalizeWidths(group.breakpoints.map(bp => bp.width));
   }
-  return { publicId: result.public_id, cloudName, width: result.width, height: result.height, version: result.version, sizes, widths };
+  return { publicId, cloudName, width, height, version, sizes, widths };
 }
 
 export function signature(params, apiSecret) {
@@ -57,14 +59,56 @@ export async function requestCloudinary({ cloudName, apiKey, apiSecret, publicId
   const response = await fetcher(`https://api.cloudinary.com/v1_1/${cloudName}/image/${file ? 'upload' : 'explicit'}`, {
     method: 'POST', body: form, signal: AbortSignal.timeout(180000),
   });
-  const result = await response.json();
-  if (!response.ok || result.error) throw new Error(result.error?.message || `Cloudinary request failed (${response.status}).`);
+  const result = await response.json().catch(() => null);
+  if (!response.ok || result?.error) {
+    throw new Error(result?.error?.message || `Cloudinary request failed (${response.status}).`);
+  }
+  if (!result) throw new Error('Cloudinary returned an unreadable response. The local manifest was not changed.');
   if (result.existing && !overwrite) throw new Error('That public ID already exists. Use --existing to analyze it, or --overwrite to replace it.');
   return result;
 }
 
 function escapeAttribute(value) {
   return String(value).replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+}
+
+export async function saveAsset(asset, path = manifestPath) {
+  const lockPath = `${path}.lock`;
+  const deadline = Date.now() + 5000;
+  let lock;
+  while (!lock) {
+    try {
+      lock = await open(lockPath, 'wx');
+    } catch (error) {
+      if (error.code !== 'EEXIST') throw error;
+      if (Date.now() >= deadline) {
+        throw new Error('Another command holds the manifest lock. Retry after it finishes. If the command was interrupted, remove the abandoned .lock file.');
+      }
+      await delay(50);
+    }
+  }
+
+  const temporary = `${path}.${process.pid}.tmp`;
+  try {
+    const manifest = JSON.parse(await readFile(path, 'utf8'));
+    const key = `${asset.cloudName}/${asset.publicId}`;
+    const previous = manifest[key];
+    if (previous?.version > asset.version) {
+      throw new Error('A newer upload is already in the manifest. Run --existing to analyze the current asset.');
+    }
+    const entry = { ...asset, sizes: asset.sizes ?? previous?.sizes };
+    manifest[key] = entry;
+    await writeFile(temporary, JSON.stringify(manifest, null, 2) + '\n');
+    await rename(temporary, path);
+    return entry;
+  } finally {
+    try {
+      await rm(temporary, { force: true });
+    } finally {
+      await lock.close();
+      await rm(lockPath, { force: true });
+    }
+  }
 }
 
 export async function main(args = process.argv.slice(2)) {
@@ -89,7 +133,7 @@ export async function main(args = process.argv.slice(2)) {
   const cloudName = env.PUBLIC_CLOUDINARY_CLOUD_NAME?.trim() || env.CLOUDINARY_CLOUD_NAME?.trim() || DEFAULT_CLOUD;
   const apiKey = env.CLOUDINARY_API_KEY;
   const apiSecret = env.CLOUDINARY_API_SECRET;
-  if (!apiKey || !apiSecret) throw new Error('Add CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET to .env.local first. See CLOUDINARY.md.');
+  if (!apiKey || !apiSecret) throw new Error('Add CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET to .env.local first. See the image workflow in README.md.');
   const file = values.existing ? undefined : resolve(positionals[0]);
   if (file && !(await stat(file)).isFile()) throw new Error('The upload path must be a file.');
   const localId = file ? relative(root, file).replaceAll('\\', '/').replace(/^(?:src|public)\//, '').slice(0, -extname(file).length || undefined) : positionals[0];
@@ -108,15 +152,9 @@ export async function main(args = process.argv.slice(2)) {
   } catch (error) {
     throw new Error(String(error.message).replaceAll(apiSecret, '[redacted]').replaceAll(apiKey, '[redacted]'));
   }
-  const asset = assetFromResponse(result, cloudName, values.sizes);
-  const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
-  manifest[`${cloudName}/${asset.publicId}`] = asset;
-  const temporary = `${manifestPath}.${process.pid}.tmp`;
-  await writeFile(temporary, JSON.stringify(manifest, null, 2) + '\n');
-  await rename(temporary, manifestPath);
+  const asset = await saveAsset(assetFromResponse(result, cloudName, values.sizes));
   console.log('Saved src/data/cloudinary-images.json. Paste this into a Markdown post:\n');
-  const sizes = asset.sizes ? ` sizes="${escapeAttribute(asset.sizes)}"` : '';
-  console.log(`<cloudinary-picture src="${escapeAttribute(asset.publicId)}" cloud-name="${cloudName}" alt="${escapeAttribute(values.alt ?? 'Describe this image')}" width="${asset.width}" height="${asset.height}"${sizes}></cloudinary-picture>`);
+  console.log(`<cloudinary-picture src="${escapeAttribute(asset.publicId)}" cloud-name="${cloudName}" alt="${escapeAttribute(values.alt ?? 'Describe this image')}"></cloudinary-picture>`);
   console.log(`\nFor a post cover, use:\ncoverImage: ${JSON.stringify(asset.publicId)}\ncoverAlt: ${JSON.stringify(values.alt ?? 'Describe this image')}\ncoverCloudName: ${JSON.stringify(cloudName)}`);
 }
 
