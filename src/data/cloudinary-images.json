@@ -249,5 +249,60 @@
         1920
       ]
     }
+  },
+  "paulapplegate-com/images/blog/martin-gleizes-sVOz4Jn7XMQ-unsplash": {
+    "publicId": "images/blog/martin-gleizes-sVOz4Jn7XMQ-unsplash",
+    "cloudName": "paulapplegate-com",
+    "width": 3476,
+    "height": 4345,
+    "version": 1795306320,
+    "widths": {
+      "jxl": [
+        50,
+        583,
+        824,
+        1012,
+        1165,
+        1305,
+        1447,
+        1547,
+        1631,
+        1704,
+        1836,
+        1920
+      ],
+      "avif": [
+        50,
+        667,
+        930,
+        1112,
+        1330,
+        1481,
+        1625,
+        1773,
+        1916,
+        1920
+      ],
+      "webp": [
+        50,
+        471,
+        656,
+        835,
+        879,
+        945,
+        1031,
+        1108,
+        1185,
+        1260,
+        1325,
+        1388,
+        1453,
+        1515,
+        1575,
+        1635,
+        1676,
+        1920
+      ]
+    }
   }
 }
