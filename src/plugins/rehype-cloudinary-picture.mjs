@@ -1,5 +1,5 @@
 import { fromHtml } from "hast-util-from-html";
-import { getPictureData } from "../lib/cloudinary-core.mjs";
+import { getResponsiveImage } from "../lib/cloudinary-core.mjs";
 
 const element = (tagName, properties, children = []) => ({
   type: "element",
@@ -45,15 +45,12 @@ function picture(properties, cloudName) {
   if (fetchPriority !== undefined && !["high", "low", "auto"].includes(fetchPriority)) {
     throw new Error("Image fetchpriority must be high, low, or auto.");
   }
-  const data = getPictureData(src, { ...options, loading });
-  const attributes = { ...data.img, alt: String(properties.alt), loading, decoding: "async" };
+  const img = getResponsiveImage(src, { ...options, loading });
+  const attributes = { ...img, alt: String(properties.alt), loading, decoding: "async" };
   if (fetchPriority !== undefined) attributes.fetchPriority = fetchPriority;
-  if (properties.className) attributes.className = properties.className;
+  attributes.className = ["cloudinary-picture"].concat(properties.className || []);
   if (properties.title) attributes.title = properties.title;
-  return element("picture", { className: ["cloudinary-picture"] }, [
-    ...data.sources.map((source) => element("source", source)),
-    element("img", attributes),
-  ]);
+  return element("img", attributes);
 }
 
 /** Supports ordinary ![alt](cloudinary:public-id) and an import-free custom HTML tag in .md and .mdx. */

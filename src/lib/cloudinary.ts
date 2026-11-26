@@ -4,7 +4,6 @@ export interface CloudinaryOptions {
   width?: number;
   height?: number;
   cloudName?: string;
-  format?: "jxl" | "avif" | "webp";
   crop?: "fill" | "scale" | "crop" | "thumb" | "pad";
   gravity?: "auto" | "face" | "center" | "north" | "south";
   blur?: number;
@@ -24,11 +23,11 @@ export function getSrcSet(publicId: string, widths?: number[], options: Cloudina
   });
 }
 
-export function getPictureData(
+export function getResponsiveImage(
   publicId: string,
   options: CloudinaryOptions & { widths?: number[]; sizes?: string; loading?: "eager" | "lazy" } = {},
 ) {
-  return images.getPictureData(publicId, { ...options, cloudName: options.cloudName || cloudName });
+  return images.getResponsiveImage(publicId, { ...options, cloudName: options.cloudName || cloudName });
 }
 
 export function getOgImageUrl(
