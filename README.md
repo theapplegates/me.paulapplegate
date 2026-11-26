@@ -19,37 +19,20 @@ Add an MDX file in `src/content/post/<slug>/index.mdx`, following an existing po
 
 ## Images
 
-Cloudinary chooses the format and quality with `f_auto,q_auto`. Each image has a responsive `srcset` so the browser can choose a width for its spot on the page. The default cloud is `paulapplegate-com`.
+Use `img: "/assets/journal/photo.jpg"` and `img_alt` for a local post thumbnail. Store the file at that exact path under `public/`. For a Cloudinary thumbnail, use `coverImage` with the asset's public ID, `coverAlt`, and an optional `coverCloudName`.
 
-**Add a photo to a post**
-
-1. Upload the photo to your Cloudinary Media Library and copy its public ID and pixel dimensions.
-2. Paste the tag below into your Markdown or MDX post. Replace the ID, description, width, and height with your photo’s details.
-
-```html
-<cloudinary-picture src="images/blog/my-photo" alt="Describe the photo" width="1600" height="900"></cloudinary-picture>
-```
-
-Once a photo is registered in `src/data/cloudinary-images.json`, you can omit the dimensions or use Markdown shorthand. For example, this displays an existing photo from “The Game Show”.
-
-```md
-![Paul and his mother on the game-show set](cloudinary:images/blog/Mom-me)
-```
-
-Use `coverImage` with the public ID and `coverAlt` for a post thumbnail. Use `coverCloudName` for a different cloud. Local thumbnails use `img: "/assets/journal/photo.jpg"` and `img_alt`, with the file under `public/`.
-
-**Optional upload and breakpoint command**
-
-To save the dimensions, version and suggested widths automatically, set `CLOUDINARY_API_KEY` and `CLOUDINARY_API_SECRET` in your local `.env.local`. Run one of these commands.
+To register a Cloudinary asset, set `CLOUDINARY_API_KEY` and `CLOUDINARY_API_SECRET` in your local `.env.local`. Run one of these commands:
 
 ```sh
 pnpm cloudinary:breakpoints src/images/blog/photo.jpg --alt="A description of the photo"
 pnpm cloudinary:breakpoints images/blog/photo --existing --alt="A description of the photo"
 ```
 
-Commit the updated `src/data/cloudinary-images.json` and paste the printed tag into your post. The command requests one set of suggested widths. The site builds without API credentials and uses the saved widths and dimensions for registered photos.
+Commit the updated `src/data/cloudinary-images.json` and paste the printed tag into the post. For a registered image, you can also write `![A description](cloudinary:images/blog/photo)`. The Astro build reads the manifest without Cloudinary credentials.
 
-Images load lazily by default. On a post’s main above-the-fold photo, use `loading="eager" fetchpriority="high"`. Set both `width` and `height` to choose a crop. For different crops by screen size, see the `CloudinaryImage` example at the end of `src/content/post/the-game-show/index.mdx`.
+Cloudinary's analysis supplies suggested widths by format. For article photos, the renderer fills gaps near common display widths. Custom crops use widths suited to their placement and stay within the pixels available in the original. Versions, crops, widths, and formats are encoded in delivery URLs. The analysis command discards its temporary derivatives. Cloudinary generates the delivered variants on request.
+
+Use both `width` and `height` to set a custom crop. Use `loading="eager" fetchpriority="high"` on an article's likely LCP image. Other article images lazy-load by default. The HTML prefers JPEG XL, followed by AVIF and a responsive WebP fallback.
 
 Verify image changes with `pnpm test` and `pnpm build`.
 

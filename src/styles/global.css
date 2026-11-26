@@ -10,8 +10,12 @@
 
 
 
-/* Responsive Cloudinary images in Markdown and MDX posts. */
-img.cloudinary-picture {
+ /* Markdown images share the same responsive picture pipeline. */
+.cloudinary-picture {
+  display: block;
+}
+
+.cloudinary-picture img {
   display: block;
   width: 100%;
   height: auto;
