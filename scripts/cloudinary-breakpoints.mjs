@@ -5,7 +5,7 @@ import { parseEnv, parseArgs } from 'node:util';
 import { setTimeout as delay } from 'node:timers/promises';
 import { dirname, resolve, relative, extname, basename, isAbsolute } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { DEFAULT_CLOUD, FORMATS, normalizeWidths } from '../src/lib/cloudinary-core.mjs';
+import { DEFAULT_CLOUD, normalizeWidths } from '../src/lib/cloudinary-core.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const manifestPath = resolve(root, 'src/data/cloudinary-images.json');
@@ -15,10 +15,10 @@ export function breakpointRequests({ minWidth = 50, maxWidth = 1920, bytesStep =
     if (!Number.isInteger(value) || value < 1) throw new Error('Breakpoint options must be positive integers.');
   }
   if (minWidth > maxWidth || maxImages < 3 || maxImages > 200) throw new Error('Require min-width <= max-width and 3–200 max-images.');
-  return FORMATS.map(format => ({
-    create_derived: false, transformation: `f_${format},q_auto`,
+  return [{
+    create_derived: false, transformation: "q_auto",
     min_width: minWidth, max_width: maxWidth, bytes_step: bytesStep, max_images: maxImages,
-  }));
+  }];
 }
 
 export function assetFromResponse(result, cloudName, sizes) {
@@ -26,15 +26,9 @@ export function assetFromResponse(result, cloudName, sizes) {
   if (!publicId || [width, height, version].some(value => !Number.isSafeInteger(value) || value < 1)) {
     throw new Error('Cloudinary did not return a public ID, dimensions and version. The local manifest was not changed.');
   }
-  const widths = {};
-  for (const format of FORMATS) {
-    const group = result.responsive_breakpoints?.find(item =>
-      new RegExp(`(?:^|[,/])f_${format}(?:$|[,/])`).test(item.transformation || '') ||
-      item.breakpoints?.some(bp => new RegExp(`f_${format}(?:[,/])|\\.${format}(?:$|\\?)`).test(bp.secure_url || ''))
-    );
-    if (!group?.breakpoints?.length) throw new Error(`Cloudinary returned no ${format.toUpperCase()} breakpoints. The local manifest was not changed.`);
-    widths[format] = normalizeWidths(group.breakpoints.map(bp => bp.width));
-  }
+  const breakpoints = result.responsive_breakpoints?.[0]?.breakpoints;
+  if (!breakpoints?.length) throw new Error('Cloudinary returned no breakpoints. The local manifest was not changed.');
+  const widths = normalizeWidths(breakpoints.map(bp => bp.width));
   return { publicId, cloudName, width, height, version, sizes, widths };
 }
 
@@ -145,7 +139,7 @@ export async function main(args = process.argv.slice(2)) {
     minWidth: Number(values['min-width'] ?? 50), maxWidth: Number(values['max-width'] ?? 1920),
     bytesStep: Number(values['bytes-step'] ?? 20000), maxImages: Number(values['max-images'] ?? 20),
   });
-  console.log(`${file ? 'Uploading' : 'Analyzing'} "${publicId}" in ${cloudName}; requesting JXL, AVIF and WebP breakpoints...`);
+  console.log(`${file ? 'Uploading' : 'Analyzing'} "${publicId}" in ${cloudName}; requesting responsive widths...`);
   let result;
   try {
     result = await requestCloudinary({ cloudName, apiKey, apiSecret, publicId, file, overwrite: values.overwrite, requests });

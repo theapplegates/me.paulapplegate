@@ -5,7 +5,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fromHtml } from "hast-util-from-html";
 import {
-  getPictureData,
+  getResponsiveImage,
   getSrcSet,
   getImageUrl,
   getOgImageUrl,
@@ -25,9 +25,7 @@ const sample = {
   height: 800,
   version: 12345,
   responsive_breakpoints: [
-    { transformation: "f_jxl,q_auto", breakpoints: [{ width: 200 }, { width: 700 }] },
-    { transformation: "f_avif,q_auto", breakpoints: [{ width: 300 }, { width: 800 }] },
-    { transformation: "f_webp,q_auto", breakpoints: [{ width: 320 }, { width: 960 }] },
+    { transformation: "q_auto", breakpoints: [{ width: 320 }, { width: 960 }] },
   ],
 };
 const failFile = {
@@ -36,32 +34,23 @@ const failFile = {
   },
 };
 
-test("picture order and fallback are explicit, with aligned responsive crops", () => {
-  const picture = getPictureData("folder/photo", {
+test("automatic delivery uses a single srcset with aligned responsive crops", () => {
+  const picture = getResponsiveImage("folder/photo", {
     width: 1600,
     height: 900,
     widths: [800, 400, 800],
     sizes: "50vw",
   });
-  assert.deepEqual(
-    picture.sources.map((s) => s.type),
-    ["image/jxl", "image/avif"],
-  );
-  for (const [index, format] of ["jxl", "avif"].entries()) {
-    const source = picture.sources[index];
-    assert.equal(source.sizes, "50vw");
-    assert.match(
-      source.srcset,
-      new RegExp(`f_${format},q_auto,w_400,h_225,c_fill,g_auto/v1/folder/photo 400w`),
-    );
-    assert.match(source.srcset, /w_800,h_450,c_fill/);
-    assert.doesNotMatch(source.srcset, /f_auto/);
-  }
-  assert.match(picture.img.src, /f_webp,q_auto,w_800,h_450/);
-  assert.match(picture.img.srcset, /f_webp,q_auto,w_400,h_225,c_fill,g_auto.* 400w/);
-  assert.match(picture.img.srcset, /f_webp,q_auto,w_800,h_450,c_fill,g_auto.* 800w$/);
-  assert.equal(picture.img.width, 1600);
-  assert.equal(picture.img.height, 900);
+  const base = "https://res.cloudinary.com/paulapplegate-com/image/upload/f_auto,q_auto";
+  const small = `${base},w_400,h_225,c_fill,g_auto/v1/folder/photo`;
+  const large = `${base},w_800,h_450,c_fill,g_auto/v1/folder/photo`;
+  assert.equal(picture.srcset, `${small} 400w, ${large} 800w`);
+  assert.equal(picture.src, large);
+  assert.equal(picture.sizes, "50vw");
+  assert.equal(picture.width, 1600);
+  assert.equal(picture.height, 900);
+  assert.match(getImageUrl("photo"), /f_auto,q_auto\//);
+  assert.match(getSrcSet("photo", [400]), /f_auto,q_auto,w_400\/v1\/photo 400w$/);
 });
 
 test("IDs are URL-encoded and invalid responsive widths are rejected", () => {
@@ -71,24 +60,22 @@ test("IDs are URL-encoded and invalid responsive widths are rejected", () => {
   );
   assert.throws(() => getSrcSet("x", [0, 400]), /positive integers/);
   assert.throws(() => getSrcSet("x", [NaN]), /positive integers/);
-  assert.throws(() => getPictureData("x"), /width must/);
+  assert.throws(() => getResponsiveImage("x"), /width must/);
   assert.throws(() => getImageUrl("https://example.org/photo.jpg"), /public ID/);
 });
 
 test("saved breakpoint ceilings, dimensions, sizes and version work without credentials", () => {
   manifest["test-cloud/blog/test"] = assetFromResponse(sample, "test-cloud", "75vw");
   try {
-    const picture = getPictureData("blog/test", { cloudName: "test-cloud" });
-    assert.equal(picture.img.width, 1200);
-    assert.equal(picture.img.height, 800);
-    assert.equal(picture.img.sizes, "75vw");
-    assert.match(picture.sources[0].srcset, / 320w, .* 700w$/);
-    assert.match(picture.sources[1].srcset, / 320w, .* 800w$/);
-    assert.match(picture.img.srcset, / 320w, .* 960w$/);
-    assert.match(picture.img.src, /\/v12345\/blog\/test$/);
-    assert.throws(() => getPictureData("blog/test", { cloudName: "other-cloud" }), /width must/);
-    const override = getPictureData("blog/test", { cloudName: "test-cloud", widths: [400, 800] });
-    assert.match(override.sources[0].srcset, / 400w, .* 800w$/);
+    const picture = getResponsiveImage("blog/test", { cloudName: "test-cloud" });
+    assert.equal(picture.width, 1200);
+    assert.equal(picture.height, 800);
+    assert.equal(picture.sizes, "75vw");
+    assert.match(picture.srcset, / 320w, .* 960w$/);
+    assert.match(picture.src, /\/v12345\/blog\/test$/);
+    assert.throws(() => getResponsiveImage("blog/test", { cloudName: "other-cloud" }), /width must/);
+    const override = getResponsiveImage("blog/test", { cloudName: "test-cloud", widths: [400, 800] });
+    assert.match(override.srcset, / 400w, .* 800w$/);
   } finally {
     delete manifest["test-cloud/blog/test"];
   }
@@ -101,42 +88,42 @@ test("wide gaps in the analyzed widths get useful candidates without upscaling a
     width: 900,
     height: 1800,
     version: 12345,
-    widths: { jxl: [50, 900], avif: [50, 900], webp: [50, 900] },
+    // An entry from the earlier per-format manifest.
+    widths: { webp: [50, 883] },
   };
   manifest["test-cloud/tall-photo"] = original;
   try {
     const options = { cloudName: original.cloudName };
-    const natural = getPictureData(original.publicId, { ...options, width: 400 });
-    assert.equal(natural.img.height, 800);
-    assert.match(natural.sources[1].srcset, / 320w, .* 800w, .* 900w$/);
-    assert.match(natural.img.src, /w_400,h_800/);
-    assert.ok(natural.img.srcset.includes(`${natural.img.src} 400w`));
+    const natural = getResponsiveImage(original.publicId, { ...options, width: 400 });
+    assert.equal(natural.height, 800);
+    assert.match(natural.srcset, / 320w, .* 800w, .* 883w$/);
+    assert.match(natural.src, /w_400,h_800/);
+    assert.ok(natural.srcset.includes(`${natural.src} 400w`));
 
-    const crop = getPictureData(original.publicId, {
+    const crop = getResponsiveImage(original.publicId, {
       ...options, width: 100, height: 400, widths: [640, 960],
     });
-    assert.match(crop.sources[0].srcset, /w_450,h_1800,.* 450w$/);
-    assert.doesNotMatch(crop.sources[0].srcset, /, https:/);
-    assert.match(crop.img.src, /w_450,h_1800/);
+    assert.match(crop.srcset, /w_450,h_1800,.* 450w$/);
+    assert.doesNotMatch(crop.srcset, /, https:/);
+    assert.match(crop.src, /w_450,h_1800/);
   } finally {
     delete manifest["test-cloud/tall-photo"];
   }
 });
 
 test("nearby analyzed widths are reused without skipping a common slot", () => {
-  const picture = getPictureData("images/blog/Contesttantform");
-  assert.match(picture.sources[0].srcset, / 943w, .* 1103w,/);
-  assert.match(picture.sources[1].srcset, / 960w, .* 1086w,/);
-  assert.doesNotMatch(picture.sources[0].srcset, / 1207w,/);
-  assert.match(picture.img.src, /w_949,h_/);
+  const picture = getResponsiveImage("images/blog/Contesttantform");
+  assert.match(picture.srcset, / 949w, .* 1116w,/);
+  assert.doesNotMatch(picture.srcset, / 1200w,/);
+  assert.match(picture.src, /w_949,h_/);
 });
 
 test("scale and pad do not send unsupported auto gravity", () => {
   for (const crop of ["scale", "pad"]) {
     const options = { width: 800, height: 600, widths: [400], crop };
-    const picture = getPictureData("photo", options);
-    assert.match(picture.img.src, new RegExp(`,c_${crop}/`));
-    assert.throws(() => getPictureData("photo", { ...options, gravity: "auto" }), /Auto gravity requires/);
+    const picture = getResponsiveImage("photo", options);
+    assert.match(picture.src, new RegExp(`,c_${crop}/`));
+    assert.throws(() => getResponsiveImage("photo", { ...options, gravity: "auto" }), /Auto gravity requires/);
   }
 });
 
@@ -160,8 +147,8 @@ test("Markdown custom tag escapes text, accepts cloud override and leaves code/p
     ],
   };
   rehypeCloudinaryPicture({ cloudName: "custom-cloud" })(tree, failFile);
-  assert.equal(tree.children[0].tagName, "picture");
-  const img = tree.children[0].children.at(-1);
+  assert.equal(tree.children[0].tagName, "img");
+  const img = tree.children[0];
   assert.equal(img.properties.alt, 'A "photo" & view');
   assert.match(img.properties.src, /cloudinary.com\/demo\//);
   assert.equal(tree.children[1].tagName, "img");
@@ -190,15 +177,15 @@ test("MDX JSX form of the custom tag is transformed like the HTML form", () => {
       ],
     };
     rehypeCloudinaryPicture({ cloudName: "custom-cloud" })(tree, failFile);
-    assert.equal(tree.children[0].tagName, "picture");
-    const img = tree.children[0].children.at(-1);
+    assert.equal(tree.children[0].tagName, "img");
+    const img = tree.children[0];
     assert.equal(img.properties.alt, "A test photo");
     assert.match(img.properties.src, /cloudinary.com\/test-cloud\//);
     assert.match(img.properties.src, /e_grayscale/);
     assert.equal(img.properties.loading, "eager");
     assert.equal(img.properties.fetchPriority, "high");
     assert.equal(img.properties.sizes, "75vw");
-    assert.equal(tree.children[0].children[0].properties.sizes, "75vw");
+    assert.deepEqual(img.properties.className, ["cloudinary-picture"]);
   } finally {
     delete manifest["test-cloud/blog/test"];
   }
@@ -209,10 +196,9 @@ test("Markdown shorthand uses manifest data; missing metadata reports an actiona
   try {
     const tree = fromHtml('<p><img src="cloudinary:blog/test" alt="Test"></p>', { fragment: true });
     rehypeCloudinaryPicture({ cloudName: "test-cloud" })(tree, failFile);
-    assert.equal(tree.children[0].children[0].tagName, "picture");
-    for (const imagePart of tree.children[0].children[0].children) {
-      assert.equal(imagePart.properties.sizes, "auto, 75vw");
-    }
+    const img = tree.children[0].children[0];
+    assert.equal(img.tagName, "img");
+    assert.equal(img.properties.sizes, "auto, 75vw");
     const invalid = fromHtml('<img src="cloudinary:missing" alt="Missing">', { fragment: true });
     assert.throws(
       () => rehypeCloudinaryPicture()(invalid, failFile),
@@ -223,11 +209,11 @@ test("Markdown shorthand uses manifest data; missing metadata reports an actiona
   }
 });
 
-test("Cloudinary analysis requests every explicit format and refuses incomplete responses", () => {
+test("Cloudinary analysis requests one width list and refuses incomplete responses", () => {
   const requests = breakpointRequests();
   assert.deepEqual(
     requests.map((r) => r.transformation),
-    ["f_jxl,q_auto", "f_avif,q_auto", "f_webp,q_auto"],
+    ["q_auto"],
   );
   assert.ok(requests.every((r) => !r.create_derived && r.max_width === 1920));
   assert.throws(() => breakpointRequests({ minWidth: 2000, maxWidth: 1000 }), /min-width/);
@@ -238,7 +224,7 @@ test("Cloudinary analysis requests every explicit format and refuses incomplete 
         "test",
         "100vw",
       ),
-    /no WEBP breakpoints/,
+    /no breakpoints/,
   );
 });
 
@@ -263,7 +249,7 @@ test("existing-image analysis signs a form without transmitting the API secret",
       assert.equal(params.api_key, "test-key");
       assert.ok(!JSON.stringify(params).includes("test-secret"));
       assert.equal(params.file, undefined);
-      assert.equal(JSON.parse(params.responsive_breakpoints).length, 3);
+      assert.equal(JSON.parse(params.responsive_breakpoints).length, 1);
       return { ok: true, json: async () => sample };
     },
   );
@@ -292,7 +278,6 @@ test("simultaneous asset registrations preserve unrelated assets and the newest 
   }
 });
 
-test("social previews use JPEG separately from page picture fallbacks", () => {
-  assert.match(getOgImageUrl("photo", { cloudName: "demo" }), /f_jpg,q_auto,w_1200,h_630/);
-  assert.doesNotMatch(getPictureData("photo", { width: 1200, height: 800 }).img.src, /f_jpg/);
+test("social preview URLs use automatic delivery with a 1200 by 630 crop", () => {
+  assert.match(getOgImageUrl("photo", { cloudName: "demo" }), /f_auto,q_auto,w_1200,h_630,c_fill,g_auto/);
 });
