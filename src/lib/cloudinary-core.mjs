@@ -1,6 +1,7 @@
 import manifest from "../data/cloudinary-images.json" with { type: "json" };
 
 export const DEFAULT_CLOUD = "paulapplegate-com";
+export const FORMATS = ["jxl", "avif", "webp"];
 const AUTO_GRAVITY_CROPS = ["fill", "crop", "thumb"];
 export const DEFAULT_WIDTHS = [320, 400, 480, 640, 800, 960, 1120, 1280, 1600, 1920];
 // Match the 1200px container and TOC spacing. Approximate the article's font-dependent ch caps in rem.
@@ -45,7 +46,9 @@ function identity(publicId, cloudName) {
 }
 
 function deliveryUrl(image, options) {
-  const t = ["f_auto", "q_auto"];
+  const format = options.format ?? "webp";
+  if (![...FORMATS, "jpg"].includes(format)) throw new Error(`Unsupported image format: ${format}`);
+  const t = [`f_${format}`, "q_auto"];
   if (options.width !== undefined) t.push(`w_${positiveDimension(options.width, "width")}`);
   if (options.height !== undefined) t.push(`h_${positiveDimension(options.height, "height")}`);
   if (options.crop) {
@@ -90,7 +93,7 @@ export function getSrcSet(publicId, widths = DEFAULT_WIDTHS, options = {}) {
   return srcSet(candidatesFor(identity(publicId, options.cloudName), normalizeWidths(widths), options));
 }
 
-function responsiveWidths(explicitWidths, analyzedWidths, nativeLimit) {
+function pictureWidths(explicitWidths, analyzedWidths, nativeLimit) {
   if (explicitWidths !== undefined) {
     const widths = normalizeWidths(explicitWidths);
     return [...new Set(widths.map(width => Math.min(width, nativeLimit)))];
@@ -106,7 +109,7 @@ function responsiveWidths(explicitWidths, analyzedWidths, nativeLimit) {
   return normalizeWidths([...widths, limit]);
 }
 
-export function getResponsiveImage(publicId, options = {}) {
+export function getPictureData(publicId, options = {}) {
   const image = identity(publicId, options.cloudName);
   const { asset } = image;
   const nativeRatio = asset ? asset.height / asset.width : undefined;
@@ -127,15 +130,21 @@ export function getResponsiveImage(publicId, options = {}) {
   const useAnalysis = asset && crop === "fill" && !options.blur && !options.grayscale &&
     (height === Math.round(width * asset.height / asset.width) ||
       width === Math.round(height * asset.width / asset.height));
-  // Older manifests stored separate lists. Reuse the former fallback's widths for those entries.
-  const savedWidths = asset?.widths;
-  const analyzed = Array.isArray(savedWidths) ? savedWidths : savedWidths?.webp;
-  const widths = responsiveWidths(options.widths, useAnalysis ? analyzed : undefined, nativeLimit);
-  const candidates = candidatesFor(image, widths, transforms);
-  const fallback = candidates.findLast(candidate => candidate.width <= Math.min(width, 960)) ?? candidates[0];
-  return { src: fallback.url, srcset: srcSet(candidates), sizes, width, height };
+  const [jxl, avif, webp] = FORMATS.map(format => {
+    const widths = pictureWidths(options.widths, useAnalysis ? asset.widths?.[format] : undefined, nativeLimit);
+    return candidatesFor(image, widths, { ...transforms, format });
+  });
+  const fallback = webp.findLast(candidate => candidate.width <= Math.min(width, 960)) ?? webp[0];
+  return {
+    sources: [
+      { type: "image/jxl", srcset: srcSet(jxl), sizes },
+      { type: "image/avif", srcset: srcSet(avif), sizes },
+    ],
+    img: { src: fallback.url, srcset: srcSet(webp), sizes, width, height },
+  };
 }
 
+// Social metadata is a single JPEG URL for crawlers, outside the page's picture fallback chain.
 export function getOgImageUrl(publicId, options = {}) {
   return getImageUrl(publicId, {
     ...options,
@@ -143,5 +152,6 @@ export function getOgImageUrl(publicId, options = {}) {
     height: 630,
     crop: "fill",
     gravity: "auto",
+    format: "jpg",
   });
 }
