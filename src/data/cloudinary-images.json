@@ -449,5 +449,52 @@
         900
       ]
     }
+  },
+  "paulapplegate-com/images/blog/diego-miranda-2vxthMQDeZc-unsplash": {
+    "publicId": "images/blog/diego-miranda-2vxthMQDeZc-unsplash",
+    "cloudName": "paulapplegate-com",
+    "width": 5550,
+    "height": 7400,
+    "version": 1795815262,
+    "widths": {
+      "jxl": [
+        50,
+        558,
+        860,
+        1102,
+        1286,
+        1451,
+        1572,
+        1698,
+        1790,
+        1912,
+        1916,
+        1920
+      ],
+      "avif": [
+        50,
+        899,
+        1491,
+        1841,
+        1919,
+        1920
+      ],
+      "webp": [
+        50,
+        525,
+        816,
+        1060,
+        1073,
+        1211,
+        1342,
+        1438,
+        1539,
+        1719,
+        1725,
+        1909,
+        1918,
+        1920
+      ]
+    }
   }
 }

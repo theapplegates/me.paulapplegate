@@ -1,0 +1,349 @@
+---
+title: "Mercedes-Benz USA Media Newsroom"
+source: "media.mbusa.com"
+author: ""
+date: ""
+url: "https://media.mbusa.com/news/high-tech-suv-with-sports-car-dna-the-new-mercedes-amg-gt-suv"
+---
+*   **“Born in Affalterbach”: first full-size SUV developed in-house by Mercedes-AMG and the second vehicle based on the AMG.EA high performance architecture**
+*   **Unique drivetrain technology: three axial flux motors and a Formula 1-based 800-volt battery with directly cooled cylindrical cells for fast, repeatable and sustained power delivery**
+*   **Remarkable sustained output: up to 711 hp of continuous output sets new standards in the segment**
+*   **Impressive power delivery: AMG GT 63 SUV delivers peak output of 1,153 hp**
+*   **Outstanding DC fast charging performance: with a charging capacity up to 710 kW1, up to 450 km2 can be charged in as little as 10 minutes**
+*   **Advanced suspension: newly developed AMG ACTIVE RIDE CONTROL+, featuring active pitch and roll stabilization for the first time**
+*   **Thrilling driving experience: highly customizable driving dynamics and a distinctive sound experience**
+*   **Intelligent aerodynamics: active AEROKINETICS roof spoiler and Airpanel system**
+*   **Diverse portfolio with attractive AMG GT 53 SUV entry model and top-of-the-range AMG GT 63 SUV**
+
+Affalterbach. For the first time in its 59-year history, Mercedes‑AMG developed a full-size SUV from the ground up entirely in-house. The new Mercedes‑AMG GT SUV is the second model based on the AMG.EA high performance architecture, combining the commanding presence of a full-size SUV with the thrilling driving experience of a sports car. A sporty seating position, low center of gravity and low, dynamic silhouette define its character without compromising the hallmark qualities of an SUV. Modern lightweight construction concepts and an intelligent vehicle design also provide the basis for compelling weight advantages.
+
+As in the recently unveiled AMG GT 4‑Door Coupe, three axial flux motors deliver exceptional performance in the top-of-the-range model. Its high performance battery with integrated direct cooling also consistently advances the same technology concept: it enables sustained high power delivery while increasing DC charging capacity even further, to as much as 710 kW¹. The newly developed AMG ACTIVE RIDE CONTROL+ suspension with active pitch and roll stabilization combines sporty precision with supreme comfort. With this exceptional blend of performance, comfort and everyday usability, the Mercedes‑AMG GT SUV sets a new benchmark in its segment. An immersive sound experience featuring the authentic sound of an AMG V8 or six-cylinder engine completes the thrilling AMG driving experience.
+
+The all-new 2028 Mercedes-AMG GT SUV arrives at U.S. dealerships in summer 2027. At launch, the portfolio will include three models: the Mercedes‑AMG GT 63 SUV, the Mercedes‑AMG GT 55 SUV and the Mercedes‑AMG GT 53 SUV.
+
+**“With the new Mercedes‑AMG GT SUV, we’re bringing the groundbreaking innovations of our AMG.EA architecture to a full-size SUV. Powered by three pioneering axial flux motors and a revolutionary high-voltage battery, we’re setting a new benchmark in the electric SUV segment. We’re demonstrating that electric performance today no longer requires any compromises in sustained power, range or charging speed.”**
+
+Jörg Burzer, Member of the Board of Management, Mercedes-Benz Group AG, Chief Technology Officer, Development & Procurement
+
+**“Our customers will experience the Mercedes‑AMG GT SUV as a vehicle that, for the first time, uniquely combines two worlds: the practical advantages of a full-size SUV with maximum space, comfort and versatility, alongside the emotional sports car character of a genuine AMG. The key to this lies in the high-tech from Affalterbach. In short: SUV by shape. GT by nature.”**
+
+Stefan Weckbach, Chairman of the Management Board of Mercedes‑AMG GmbH and Head of Business Units Mercedes‑Benz G‑Class & Mercedes‑Maybach
+
+**“Performance starts with presence. The new Mercedes‑AMG GT SUV embodies the ultimate in dynamism. Its powerful appearance, with muscular shoulders, a wide track and a low-slung silhouette, makes its outstanding performance recognizable at first glance: pure AMG.”**
+
+Bastian Baudy, Chief Design Officer, Mercedes‑Benz Group AG
+
+**Key Facts**
+
+**New dimensions in the SUV segment:** The new Mercedes‑AMG GT SUV makes a clear statement of performance with its innovative drivetrain. Depending on the model, three axial flux motors or two synchronous motors deliver impressive power delivery. The top-of-the-range model, the AMG GT 63 SUV, achieves a peak output of 1,153 hp.
+
+**Exceptional performance:** In its top-of-the-range variant, the Mercedes-AMG GT SUV sprints from 0 to 60 mph in just 2.4 seconds3 and completes the sprint from 0 to 124 mph in 6.8 seconds3. The electronically limited top speed is 168 mph.
+
+**Maximum power, consistently available:** The AMG High Performance Electric Battery with 800-volt technology is designed specifically to deliver consistent, readily available power. Directly cooled cylindrical cells, high power density and intelligent thermal management ensure impressive performance that can be called upon repeatedly.
+
+**Two battery variants, one objective:** Short charging stops. With the 106-kWh battery, the AMG GT 53 SUV charges at up to 600 kW DC and can add up to 380 km of WLTP range2 in as little as ten minutes. The 128-kWh battery in the AMG GT 63 and AMG GT 55 SUV enables a 710-kW DC charging capacity – charging up to 450 km of WLTP range2 in as little as ten minutes. Charging from 10–80 percent state of charge (SoC) is possible in 12 minutes. At a 400 kW charging station, it takes 14 minutes (AMG GT 53 with 106-kWh battery) or 16 minutes (AMG GT 63 and AMG GT 55 SUV with 128-kWh battery)1.
+
+**New AMG ACTIVE RIDE CONTROL+ suspension:** The innovative new AMG ACTIVE RIDE CONTROL+ suspension with active pitch and roll stabilization offers a unique new range of capabilities. It combines superb long-distance ride comfort with impressive precision, providing an exceptional balance between relaxed cruising and highly dynamic driving.
+
+**AMGFORCE Sport+ redefines performance:** The AMGFORCE Sport+ drive program further enhances the exhilarating driving experience. The authentically reproduced sound of a powerful AMG V8 or a characterful AMG six-cylinder engine in all its nuances, simulated gear changes, seat vibration and an adapted display design contribute to the emotional AMG driving experience.
+
+**Driving excitement à la carte:** With the AMG DYNAMIC PLUS Package (standard on AMG GT 63 SUV; optional on AMG GT 55 SUV), the AMG RACE ENGINEER Control Unit enables the SUV’s dynamics to be finely tailored to the driving situation. Three rotary controls allow the driver to finely adjust response, handling characteristics and traction – more precisely and individually than ever before.
+
+**I****ntelligent AEROKINETICS system:** At lower speeds, the system is designed to reduce aerodynamic drag – the electronically controlled louvers of the AEROKINETICS Airpanel system open and close to direct airflow based on cooling requirements. At higher speeds, the active AEROKINETICS roof spoiler sharpens the SUV’s sporting character. It responds instantly and generates targeted aerodynamic effects for enhanced driving safety, handling stability and traction.
+
+**Dynamics given form:** Modern lightweight construction concepts and an intelligent vehicle design create the basis for compelling weight advantages of the Mercedes-AMG GT SUV. In addition, the vehicle consistently translates performance into its proportions. Its sleek silhouette reduces the frontal area and can therefore help reduce aerodynamic losses – without compromising the hallmark qualities of an SUV. This is made possible by an intelligent package with a flat integrated battery, generous headroom and interior space, as well as commanding ground clearance.
+
+****Designed without compromise for maximum performance****
+
+**Two drivetrain concepts ensure outstanding performance**
+
+The new Mercedes‑AMG GT SUV is available with two different drivetrain concepts, each featuring impressive performance. In the AMG GT 63 SUV, three innovative axial flux electric motors deliver up to 1,153 hp while the AMG GT 55 SUV delivers up to 805 hp. The AMG High Performance Electric Battery, featuring directly cooled cylindrical cells, ensures even temperature distribution and continuous power delivery even under sustained load.
+
+Even the AMG GT 53 SUV makes a strong statement: two powerful permanently excited synchronous electric motors – one on the front axle and one on the rear – deliver a combined 536 hp and give the AMG GT 53 SUV confident acceleration.
+
+****High Performance Electric Drive Units****
+
+The motors in the AMG GT 63 and AMG GT 55 SUV are integrated into a High Performance Electric Drive Unit (HP.EDU) on each axle. The rear HP.EDU combines two axial flux motors, each with a compact input planetary gearbox, within a single housing. The motors and gearboxes are oil cooled; the required pump control unit is housed in a space-saving design. Two water cooled silicon carbide inverters are designed for high voltage, high current, high temperatures and high thermal conductivity.
+
+The front HP.EDU comprises a single axial flux motor, a spur gearbox with an integrated parking lock and a liquid cooled SiC inverter. The front axle motor acts as a “booster motor” which is engaged only when additional power or traction is required at the front axle. A Disconnect Unit (DCU) decouples the front motor under light load to maximize efficiency and engages during acceleration and recuperation for optimum performance.
+
+******Entry model with two powerful synchronous motors******
+
+In the AMG GT 53 SUV, the front permanently excited synchronous electric motor also acts as a “boost” drive: it provides additional power and traction on the front axle when required – and decouples instantly under light loads to maximize efficiency.
+
+At the rear axle, the AMG GT 53 SUV features an innovative two-speed transmission that combines dynamic performance and efficiency. The first gear has a short ratio for excellent acceleration from a standstill and efficiency in city driving. Second gear is designed for power delivery at higher speeds and efficiency in highway driving.
+
+********Inspired by Formula 1®, developed in Affalterbach: AMG High Performance Electric Battery********
+
+The innovative 800-volt battery, with a usable capacity of 106 kWh (18 modules) or 128 kWh (22 modules) and directly cooled cylindrical cells, forms the technological basis for impressive performance and up to 700 km2 of electric range (22 modules).
+
+The cylindrical, tall and narrow cells (4.1-in tall; 1-in diameter) minimize the distance from the cell core to the surface for efficient heat dissipation. The laser-welded aluminum cell housing is lighter than steel and offers outstanding electrical and thermal conductivity. The cells’ full-tab design reduces internal resistance, enabling extremely high charging and discharging rates. A specialized NCMA cathode and silicon-containing anode chemistry delivers high energy density (over 298 Wh/kg), strong charging performance and a long service life. The cells are housed in plastic modules. An electrically non-conductive oil flows directly around each individual cylindrical cell to maintain an optimal temperature and ensure uniform cooling of all cells.
+
+710-kW DC fast charging is possible at 800-volt charging stations, depending on the battery variant. The system also automatically switches from 800- to 400-volt mode for charging at 400-volt stations. The AMG GT SUV is also designed to support five DC fast charging standards worldwide: NACS (USA), CCS2 (Europe), GB/T (China), CHAdeMO (Japan) and CCS1 (South Korea).
+
+****Body-in-white plus battery housing: safety as the top priority****
+
+The body-in-white of the new Mercedes-AMG GT SUV is a new design made from aluminum, steel and fiber-reinforced composites, combining high rigidity with low weight for optimum safety and technology integration. The high-voltage battery is integrated centrally into the vehicle structure and secured by a protective housing (safety box), which forms part of the crash concept and actively absorbs forces.
+
+**Innovative cooling with the Central Coolant Hub (CCH)**
+
+The Central Coolant Hub (CCH) handles the precise cooling of all components. This highly integrated unit combines numerous parts such as pumps, sensors and valves in a compact housing. The CCH is designed for a variety of scenarios. Among other things, it can ensure maximum cooling of all components during high ambient temperatures and when driving at full load. It also enables targeted and efficient cooling of individual components. For example, if the battery is within its optimal operating range and does not require cooling, the CCH can direct the cooling capacity specifically towards the EDUs and the Onebox. A single large cooling circuit with intelligent valves, supported by a cooler as well as the main and auxiliary radiators, optimizes thermal efficiency and enables immediate full charging and motor power.
+
+******Agile handling and supreme ride comfort******
+
+**New Mercedes‑AMG GT SUV combines intelligent driving dynamics systems with a multi-sensory driving experience**
+
+The Mercedes‑AMG GT SUV offers a precise, highly dynamic driving experience, supported by a powerful drivetrain, innovative AMG ACTIVE RIDE CONTROL+ suspension with active pitch and roll stabilization, active rear-axle steering and AMG Performance 4MATIC+ fully variable all-wheel drive. The AMG RACE ENGINEER Control unit allows for individual adjustment of response, handling characteristics and traction, depending on the vehicle settings. The AMGFORCE Sport+ drive program intensifies the AMG experience on an emotional level.
+
+**New AMG ACTIVE RIDE CONTROL+ suspension with active pitch and roll stabilization**
+
+The basis for the unrivalled sporty driving experience in the Mercedes‑AMG GT SUV is the completely newly developed AMG ACTIVE RIDE CONTROL+ suspension (standard on AMG GT 63 SUV; optional on AMG GT 55 SUV). It offers a unique new range of capabilities, combining outstanding long-distance ride comfort with impressive precision, which enables an exceptional balance between relaxed cruising and highly dynamic driving. Three-stage adjustable air springs, an integrated 8.2-liter pressure reservoir and the hydraulic interconnection of the dampers enable rapid ride height adjustments – including speed-dependent lowering to reduce aerodynamic drag.
+
+Instead of traditional mechanical anti-roll bars, active hydraulic elements take control of pitch and roll movements – quickly, precisely and effectively. A central pump with controlled valves regulates system pressure and ensures the desired amount of anti-roll control and roll stiffness depending on the selected drive program. The result is precise cornering and maximum ride comfort, even on rough, uneven road surfaces. The system also demonstrates its impressive effectiveness during braking and acceleration – it reduces front-end dive during braking and front-end lift during acceleration. In addition to the hydraulic components, three-stage adjustable air springs also enhance comfort and reduce body movement during lateral and longitudinal acceleration.
+
+The new Mercedes-AMG GT SUV features a multi-link suspension at both the front and rear axles. This design enables high lateral acceleration with minimal influence from the drivetrain. The high camber and toe stiffness ensure optimal road contact, even at the limits of handling, and guarantee composed behavior during load changes as well as in response to external influences such as crosswinds or road undulations. To reduce unsprung mass, the suspension links, steering knuckles and uprights on the front axle are made from forged aluminum.
+
+**Active rear-axle steering**
+
+The standard active rear-axle steering adjusts the steering angle of the rear wheels up to 6 degrees. At speeds up to 50 mph, the rear wheels steer opposite to the front wheels. This virtually shortens the wheelbase for significantly more agile turn-in as well as improved maneuverability at lower speeds. Above 50 mph, the rear wheels steer parallel to the front wheels (up to 1 degree), which virtually extends the wheelbase and noticeably improves handling stability.
+
+**High performance braking**
+
+The braking system of the Mercedes‑AMG GT SUV is tailored to the powertrain of each model. The AMG GT 53 SUV is fitted with steel brakes on both the front and rear axles. The AMG GT 55 SUV also features steel brakes as standard; a carbon ceramic braking system for both the front and rear axles is available as an option. The top-of-the-range AMG GT 63 SUV is equipped standard with carbon ceramic brakes on both the front and rear axles.
+
+**AMGFORCE Sport+ drive program**
+
+AMGFORCE Sport+ faithfully reproduces the hallmark sounds of AMG V8 (AMG GT 63 and AMG GT 55 SUV) and AMG six-cylinder engines (AMG GT 53 SUV). The original engine sounds are meticulously documented rather than synthetically generated, based on over 100 measurements taken with 16 microphones and reference vehicles such as the Mercedes AMG GT R (C 190). The sound experience is dynamic and adapts in real time to the current driving situation and driving style, including acceleration and gear changes.
+
+The drive program offers more than just sound. It simulates gear changes similar to an AMG SPEEDSHIFT® transmission, allows for manual gear changes via steering wheel paddles and includes a customized driver’s display as well as integrated seat vibration for an immersive experience.
+
+In addition to driving dynamics, the Mercedes AMG GT SUV offers further sound features for the interior, such as specific sounds when approaching the vehicle, unlocking, locking and charging. Future modes such as Launch Control, Boost and Showtime will complete the sound experience.
+
+Customers can use the sound slider to customize the engine sound and other sound profiles, with modes such as “Powerful,” “Balanced” and “Silent,” as well as a scale ranging from “Classic” to “Futuristic.”
+
+**Tailor-made driving experience with the AMG RACE ENGINEER**
+
+The AMG RACE ENGINEER in the Mercedes AMG GT 63 and AMG GT 55 SUV integrates all software and hardware components for the drivetrain and driving dynamics systems. It consists of two components: the AMG RACE ENGINEER Core, a high performance chip that controls the drivetrain, brakes and recuperation, and the available AMG RACE ENGINEER Control Unit – three rotary controls integrated into the center console that allow individual adjustment of drivetrain response, handling characteristics and traction:
+
+*   **“Response Control”** tailors the response of the electric motors to accelerator pedal inputs, adjustable continuously from relaxed to highly dynamic.
+*   **“Agility Control”** adjusts agility around the vertical axis and handling characteristics through variable torque distribution, enabling a spectrum ranging from understeer to controlled oversteer (selectable only in the RACE, AMGFORCE Sport+ or Sport drive program with ESP® off).
+*   “**Traction Control”** adjusts the level of the traction control system intervention across nine stages (selectable only in the RACE, AMGFORCE Sport+ or Sport drive program with ESP® off).
+
+********AMG Performance 4MATIC+: Intelligent fully variable all-wheel drive******** 
+
+The drive concepts in the AMG GT SUV enable maximum variability in torque distribution between the front and rear axles: the AMG GT 63 and AMG GT 55 SUV feature three independently controlled axial flux motors, while the AMG GT 53 SUV features two synchronous motors. Furthermore, in the AMG GT 63 and AMG GT 55 SUV, targeted torque vectoring enables the variable distribution of drive power individually between the rear wheels. The result is a newly developed, AMG Performance 4MATIC+ fully variable all-wheel drive system. The drive torque is controlled continuously and according to the driving situation for optimal distribution.
+
+The seamless transition between rear wheel drive and all-wheel drive is imperceptible to the driver and is based on a sophisticated matrix that integrates all control algorithms into the vehicle’s overall system architecture. For optimum traction and handling stability on slippery road surfaces, like snow and ice, sensors detect wheel slip in a fraction of a second and precisely adjust torque distribution to the driving situation.
+
+In the AMG GT 53 SUV, the front synchronous motor also engages automatically when traction is required at the front axle.
+
+**Distinctive design and active aerodynamics**
+
+****Powerful design language, active aerodynamics, driver-oriented cockpit****
+
+The silhouette alone makes it unmistakably clear – the new Mercedes AMG GT SUV is a pure performance SUV. It is characterized by a steep front end, extended wheelbase, wide track, powerful shoulders and a sporty, low-slung roofline that slopes down towards the rear spoiler.
+
+**Athletic presence**
+
+The flat windshield, elongated roofline and powerful wheel arches give the Mercedes‑AMG GT SUV an athletic appearance. The carefully defined beltline height combines excellent visibility with a high level of ergonomics and a sporty driving position. Compact exterior mirrors, frameless side windows in true GT style and sporty trim elements extending through to the rear side windows further emphasize its distinctive character. At the same time, easy access emphasizes the everyday usability expected of a full-size SUV. Powerdomes, flared wings, large wheels, short overhangs and pronounced rear shoulders make the vehicle’s performance DNA instantly recognizable – precise, powerful and unmistakably AMG.
+
+The AMG GT SUV’s imposing silhouette is complemented by front and rear designs featuring a fascinating light signature: the AMG specific radiator grille, comprising a frame and metallic vertical struts, is optionally illuminated. The central Mercedes‑Benz star – which is also optionally illuminated – the headlamps with star design daytime running lights, six circular taillights in a turbine design and the optional light strip at the rear create an unmistakable visual presence.
+
+**Active AEROKINETICS elements**
+
+The active AEROKINETICS roof spoiler on the AMG GT 63 and AMG GT 55 SUV is integrated into the silhouette at low speeds. It automatically adjusts its position to reduce aerodynamic drag or increase handling stability, depending on the driving situation. During dynamic driving, it moves to its steepest angle to deliver high traction and aerodynamic balance. The intelligent operating strategy takes into account vehicle speed, acceleration, driving dynamics and the position of the AEROKINETICS Airpanel.
+
+The AEROKINETICS Airpanel active airflow control systemregulates the cooling airflow via vertical slats in the front bumper. Normally, these remain closed to minimize aerodynamic drag, which helps maximize range. The louvers open only when certain temperature thresholds are reached on predefined components and cooling demand is particularly high.
+
+**The interior: An uncompromisingly driver-focused cockpit designed for comfort**
+
+The interior of the AMG GT SUV translates the DNA of an AMG GT cockpit into an SUV format. Drivers sit low and integrated into the vehicle – for a sporty, precise driving position. The cockpit design focuses on the driver, with intuitive controls, a 14-inch multimedia display angled towards the driver and a 10.2-inch driver display that visually form a single unit. A separate 14-inch display is available for the front passenger.
+
+The center console is ergonomically designed and, with the AMG DYNAMIC PLUS Package (standard on AMG GT 63 SUV; optional on AMG GT 55 SUV), houses the AMG RACE ENGINEER Control Unit with three rotary controls for individual adjustment of response, handling characteristics and traction. The AMG Performance steering wheel, with its contoured design and integrated AMG DRIVE UNIT buttons, offers quick access to driving functions and enables precise control of recuperation via paddles.
+
+The seats provide excellent lateral support and long-distance comfort. Optional AMG Performance seats with integrated headrests are also available. A wide range of upholstery options and materials allows for personalization. The door panels feature a sophisticated design with floating armrests, grab handle with integrated functions, ergonomically positioned seat controls and diamond quilting. The speaker grilles blend harmoniously into the design. With the optional Burmester® High-End 4D Surround Sound System, these are finished in elegant stainless steel.
+
+Despite its sporty silhouette, the rear seat offers generous headroom and legroom as well as a comfortable seating position, making the AMG GT SUV ideal for long journeys. A three-passenger rear seat is fitted standard. The rear seatbacks can be folded down and feature power folding headrests.
+
+With SKY CONTROL, the panoramic glass roof can be switched between transparent and opaque modes and offers spectacular AMG lighting effects at night.
+
+The color palette of the driver display, controls and ambient lighting is perfectly coordinated. This enables occupants to create a completely personalized atmosphere inside the vehicle. The screen design impresses with its striking aesthetics, remarkable precision and intuitive operation.
+
+**More room for personality with MANUFAKTUR**
+
+With more than 60 exclusive MANUFAKTUR paint finishes, the new Mercedes‑AMG GT SUV offers a broad spectrum of exterior colors. For the first time, AMG forged wheels can also be enhanced with new color accents. New customization options for the interior will also be available for the first time. Thanks to a wide range of personalization options, every AMG GT SUV can become a truly unmistakable one-off.
+
+**A digital experience in a class of its own for even greater personalization and performance**
+
+**AI and exclusive AMG apps transform the cockpit into a customizable command center**
+
+The new Mercedes‑AMG GT SUV sets new standards in digital experience through a connected software architecture, intelligent operating logic and the use of AI, which combines technology and emotion. Thanks to this, the driver-oriented cockpit becomes a customizable command center. The new generation MBUX infotainment is intuitive to operate. It is based on the Mercedes-Benz Operating System (MB.OS), which integrates and controls all vehicle functions.
+
+The display styles provide a personalized experience for the driver. These include “Classic” and “AMG Special” with specific sub-screens in the central gauge design (power meter/tachometer), “Pure” (streamlined speedometer), “Vehicle Data” (component temperatures; tire data) and “Trip” (navigation map; relevant route guidance information).
+
+The MBUX display and control concept focuses on the essentials: the Zero Layer displays the most relevant information, suggestions and recently used apps5. Connectivity services such as Live Traffic Information are integrated.
+
+The new generation MBUX also integrates artificial intelligence from ChatGPT, Microsoft and Google. By combining multiple AI agents in one system, MBUX revolutionizes how occupants interact with the vehicle. The MBUX Virtual Assistant can conduct complex, multi-turn conversations. The MBUX Virtual Assistant is always present on the Zero Layer as a “living” avatar, featuring dynamic colors and animations.
+
+The MBUX also includes three exclusive AMG apps which emphasize the high performance character of the AMG GT SUV: “AMG PERFORMANCE MENU,” “AMG SET UP” and “AMG TRACK PACE.”
+
+**AMG PERFORMANCE MENU: Real-time driving data**
+
+The AMG PERFORMANCE MENU provides the driver with relevant driving and powertrain information in real time. “Energy Flow” provides a virtual representation of the energy flow and indicates the current output at the front and rear axles. “Aero Flow” displays the status of the active aerodynamic features. “Warm up” provides information on when the vehicle and tires reach optimum operating temperatures. An “IWC Watch” serves as a stopwatch to monitor lap times on the racetrack. “Dynamic” displays a variety of vehicle information relevant to dynamic driving, including lateral acceleration, tire pressure and suspension status. “Power” shows the battery status and available electrical power.
+
+**AMG SET UP: Every journey individually configured**
+
+With AMG SET UP, drivers can actively adjust various functions and configure the vehicle to individual preferences – for a tailored driving experience. With “Steering Wheel,” various functions and drive programs can be customized via the steering wheel buttons for even more intuitive operation and quick access to relevant functions. The “Aero Set-up” menu provides additional control over the aerodynamics.
+
+**AMG Track Pace**
+
+When driving on a racetrack, AMG TRACK PACE records over 80 vehicle-specific data points ten times per second and displays telemetry, acceleration and race data on the driver display. Lap and sector times are also shown on the multimedia display, head-up display and driver display. Numerous racetracks are preconfigured and customers can also record and analyze their own tracks.
+
+Intelligent race navigation in the available head-up display shows corner angles and braking points to help the driver find the ideal racing line. The MBUX augmented reality function also enables the racing line of a stored track to be shown on the central display to help the driver improve lap times. Acceleration and deceleration values can be precisely measured and saved.
+
+With the optional dashcam, the integrated HD camera can record HD videos onto a USB storage device. Data can be integrated as overlays in the recording, including lap times, a mini map of the track and vehicle-specific data like speed, acceleration, steering angle and brake pedal application.
+
+**Predictive Performance Manager**
+
+The Predictive Performance Manager (PPM), which was first used during the CONCEPT AMG GT XX’s record-breaking run, makes a significant contribution to achieving optimum lap times on the racetrack. The tool optimizes energy flow depending on the selected “RACE” or “SPRINT” mode. This is done on a section-by-section and situation-specific basis directly within the operating strategy. This is because on long race circuits or over many laps on Grand Prix circuits, unlimited peak output is not the best way to achieve the fastest lap times. On the Nürburgring Nordschleife, for example, a sophisticated strategy is crucial for fast laps due to the demanding topography. On downhill sections and in tight, alternating turns, full output is not necessary, allowing energy to be conserved for the uphill sections or long straights where it can be fully deployed. The PPM therefore reduces or increases output as needed, depending on the section of the track.
+
+**From comfortable to highly dynamic: AMG DYNAMIC SELECT drive programs**
+
+Seven AMG DYNAMIC SELECT drive programs offer a wide range of driving experiences, from comfortable and relaxed to highly dynamic and exhilarating: “Comfort,” “Sport,” “AMGFORCE Sport+,” “RACE,” “Slippery,” “Eco” and “Individual.”
+
+*   **Comfort:** a balanced set-up for an overall comfortable driving experience and an efficient operating strategy (rear wheel or all-wheel drive)
+*   **Sport:** typical AMG driving dynamics for public roads, featuring high performance, permanent all-wheel drive, direct response and a firm suspension set-up
+*   **AMGFORCE Sport+:** delivers a thrilling hallmark AMG V8 driving experience
+*   **RACE:** uncompromisingly designed for the racetrack with reduced driver assistance systems, permanent all-wheel drive, instant response, firm suspension and a lower ride height. It also offers Drift Mode, Drag Race, Track Race and Launch Control
+*   **Slippery:** designed for maximum traction on slippery road surfaces (e.g., rain, snow, ice) with early intervention of assistance systems (ESP®, traction control), permanent all-wheel drive and a soft suspension set-up
+*   **Eco:** focuses on efficient driving through on-demand disengagement of the front motor, optimized aerodynamics and reduced output, torque and top speed
+*   **Individual:** drivers can select individual parameters according to personal preferences
+
+In addition, boost power is available in the Comfort, Sport and AMGFORCE Sport+ drive programs with a single pull of both steering wheel paddles. This delivers noticeable extra performance and driving excitement: more horsepower and torque, sharper throttle response, a jolt of acceleration and automatically tighten seatbelts. Special entry, activation and exit sounds complement the experience.
+
+**Manufactured at the most historic vehicle plant: The Sindelfingen complex becomes the production site**
+
+The new Mercedes-AMG GT SUV will be assembled in Hall 32. This assembly hall has been specifically retrofitted to meet the requirements of AMG.EA technology. Key body components are also produced at the plant. These include pressed parts, the body-in-white and paintwork. The Mercedes‑Benz site in Sindelfingen was founded in 1915 and, with its 111-year history, is one of Mercedes‑Benz Group AG’s most historic vehicle manufacturing plants.
+
+**Key technical specifications at a glance:**
+
+|  |  |  |
+| --- | --- | --- |
+| Mercedes‑AMG GT 63 SUV |  |  |
+| Electric motors | Type | Three axial flux motors |
+| Peak output | hp | 1,153 |
+| Continuous output | hp | 711 |
+| Torque | lb-ft | 1,475 |
+| Drive configuration |  | AMG Performance 4MATIC+ fully variable all-wheel drive |
+| Top speed (electronically limited) | mph | 168 |
+| Acceleration 0–60 mph (1-foot rollout)3 | s | 2.4 (est.) |
+| Acceleration 0–124 mph (1-foot rollout)3 | s | 6.8 (est.) |
+| Acceleration 0–60 mph | s | 2.6 (est.) |
+| Acceleration 0–124 mph | s | 7.2 (est.) |
+| Boost duration | s | 63 |
+| Nominal voltage | volts | 800 |
+| Battery capacity (usable) | kWh | 128 |
+| DC charging capacity1 | kW | 710 |
+| AC charging capacity1 | kW | 11 |
+| DC charging: 10–80% SoC (net)4 | min | 12 |
+| DC charging: range charged in as little as 10 min (WLTP combined)2 | km | 454 |
+| Energy charged in as little as 10 min1 | kWh | 83 |
+| Energy charged in as little as 5 min1 | kWh | 48 |
+| Curb weight (DIN) | kg | 2,695 |
+| Length / width w/o mirrors / height | in | 200.2 / 78.8 / 65.2 |
+| Wheelbase | in | 119.7 |
+| cd value |  | 0.27 |
+| Frontal area | m² | 2.80 |
+| Combined energy consumption1 | kWh/100 km | 23.8–21.2 |
+| City energy consumption1 | kWh/100 km | 20.2–18.0 |
+| Range (WLTP)2 | km | 620–700 |
+| Range city (WLTP)2 | km | 719–806 |
+| Trunk volume (VDA)6 | cu ft | 21.4 |
+| Frunk volume (VDA) | cu ft | 2.8 |
+
+ 
+
+|  |  |  |
+| --- | --- | --- |
+| Mercedes‑AMG GT 55 SUV |  |  |
+| Electric motors | Type | Three axial flux motors |
+| Peak output | hp | 805 |
+| Continuous output | hp | 711 |
+| Torque | lb-ft | 1,372 |
+| Drive configuration |  | AMG Performance 4MATIC+ fully variable all-wheel drive |
+| Top speed (electronically limited) | mph | 168 (optional) |
+| Acceleration 0–60 mph (1-foot rollout)3 | s | 2.7 (est.) |
+| Acceleration 0–124 mph (1-foot rollout)3 | s | 9.4 (est.) |
+| Acceleration 0–60 mph | s | 3.0 (est.) |
+| Acceleration 0–124 mph | s | 9.9 (est.) |
+| Boost duration | s | 55 |
+| Nominal voltage | volts | 800 |
+| Battery capacity (usable) | kWh | 128 |
+| DC charging capacity1 | kW | 710 |
+| AC charging capacity1 | kW | 11 |
+| DC charging: 10–80% SoC (net)4 | min | 12 |
+| DC charging: range charged in as little as 10 min (WLTP combined)2 | km | 454 |
+| Energy charged in as little as 10 min1 | kWh | 83 |
+| Energy charged in as little as 5 min1 | kWh | 48 |
+| Curb weight (DIN) | kg | 2,715 |
+| Length / width w/o mirrors / height | in | 200.2 / 78.8 / 65.2 |
+| Wheelbase | in | 119.7 |
+| cd value |  | 0.27 |
+| Frontal area | m² | 2.80 |
+| Combined energy consumption1 | kWh/100 km | 23.8–21.2 |
+| City energy consumption1 | kWh/100 km | 20.2–18.0 |
+| Range (WLTP)2 | km | 620–700 |
+| Range city (WLTP)2 | km | 719–806 |
+| Trunk volume (VDA)6 | cu ft | 21.4 |
+| Frunk volume (VDA) | cu ft | 2.8 |
+
+| Mercedes-AMG GT 53 SUV |  |  |
+| --- | --- | --- |
+| Electric motors | Type | Two permanently excited synchronous motors |
+| Peak output | hp | 536 |
+| Continuous output | hp | 362 |
+| Torque | lb-ft | 590 |
+| Drive configuration |  | AMG Performance 4MATIC+ fully variable all-wheel drive |
+| Top speed (electronically limited) | mph | 143 |
+| Acceleration 0–60 mph (1-foot rollout)3 | s | 3.7 (est.) |
+| Acceleration 0–124 mph (1-foot rollout)3 | s | 13.8 (est.) |
+| Acceleration 0–60 mph | s | 4.1 (est.) |
+| Acceleration 0–124 mph | s | 14.6 (est.) |
+| Boost duration | s | 53 |
+| Nominal voltage | volts | 800 |
+| Battery capacity (usable) | kWh | 106 |
+| DC charging capacity1 | kW | 600 |
+| AC charging capacity1 | kW | 11 |
+| DC charging: 10–80% SoC (net)4 | min | 11 |
+| DC charging: range charged in as little as 10 min (WLTP combined)2 | km | 440 |
+| Energy charged in as little as 10 min1 | kWh | 70 |
+| Energy charged in as little as 5 min1 | kWh | 41 |
+| Curb weight (DIN) | kg | 2,525 |
+| Length / width w/o mirrors / height | in | 200 / 78.8 / 65.1 |
+| Wheelbase | in | 119.7 |
+| cd value |  | 0.28 |
+| Frontal area | m² | 2.80 |
+| Combined energy consumption1 | kWh/100 km | 21.1–18.8 |
+| City energy consumption1 | kWh/100 km | 17.1–15.5 |
+| Range (WLTP)2 | km | 597–668 |
+| Range city (WLTP)2 | km | 732–809 |
+| Trunk volume (VDA)6 | cu ft | 21.4 |
+| Frunk volume (VDA) | cu ft | 2.8 |
+
+\# # #
+
+  
+
+* * *
+
+1 The figures are preliminary. No confirmed values from an officially recognized testing organization, EC type approval, or certificate of conformity with official values are available at this time. Deviations between the figures and the official values are possible.
+
+2 The actual range depends on numerous factors, such as individual driving style, environmental conditions, battery aging, auxiliary consumers such as air conditioning, optional equipment, tires, payload, and route profile, and may therefore differ from the WLTP value specified.
+
+3 "1-Foot Rollout”: The portion of distance not counted during the measurement (the ‘rollout’) corresponds to 1 foot = 30.48 cm.
+
+[](https://media.mbusa.com/news/high-tech-suv-with-sports-car-dna-the-new-mercedes-amg-gt-suv#_ednref4)4  The stated recharged range (WLTP) after 11/12 minutes was determined using the maximum DC charging power in accordance with ISO/SAE 12906 under the conditions described therein.
+
+[](https://media.mbusa.com/news/high-tech-suv-with-sports-car-dna-the-new-mercedes-amg-gt-suv#_ednref5)5  A personal Mercedes me ID and agreement to the Terms of Use for the Mercedes-Benz Digital Extras are required to use the services. In addition, the vehicle must be paired with the corresponding user account.
+
+[](https://media.mbusa.com/news/high-tech-suv-with-sports-car-dna-the-new-mercedes-amg-gt-suv#_ednref6)6  With full use of front seats.
