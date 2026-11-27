@@ -1,4 +1,11 @@
 {
+  "paulapplegate-com/breakpoints/eaccby1au28dslg4di4m": {
+    "publicId": "breakpoints/eaccby1au28dslg4di4m",
+    "cloudName": "paulapplegate-com",
+    "width": 4154,
+    "height": 5192,
+    "version": 1795406845
+  },
   "paulapplegate-com/images/blog/sayan-nath-SmR2A69YuI4-unsplash": {
     "publicId": "images/blog/sayan-nath-SmR2A69YuI4-unsplash",
     "cloudName": "paulapplegate-com",
@@ -302,6 +309,144 @@
         1635,
         1676,
         1920
+      ]
+    }
+  },
+  "paulapplegate-com/assets/journal/lake": {
+    "publicId": "assets/journal/lake",
+    "cloudName": "paulapplegate-com",
+    "width": 1400,
+    "height": 933,
+    "version": 1795747831,
+    "widths": {
+      "jxl": [
+        50,
+        455,
+        684,
+        892,
+        1061,
+        1274,
+        1399,
+        1400
+      ],
+      "avif": [
+        50,
+        453,
+        681,
+        892,
+        1071,
+        1281,
+        1367,
+        1400
+      ],
+      "webp": [
+        50,
+        412,
+        863,
+        951,
+        989,
+        1185,
+        1279,
+        1381,
+        1393,
+        1400
+      ]
+    }
+  },
+  "paulapplegate-com/assets/journal/forest": {
+    "publicId": "assets/journal/forest",
+    "cloudName": "paulapplegate-com",
+    "width": 800,
+    "height": 533,
+    "version": 1795747861,
+    "widths": {
+      "jxl": [
+        50,
+        426,
+        629,
+        748,
+        800
+      ],
+      "avif": [
+        50,
+        372,
+        552,
+        733,
+        783,
+        800
+      ],
+      "webp": [
+        50,
+        350,
+        525,
+        638,
+        741,
+        800
+      ]
+    }
+  },
+  "paulapplegate-com/assets/journal/coffee": {
+    "publicId": "assets/journal/coffee",
+    "cloudName": "paulapplegate-com",
+    "width": 800,
+    "height": 533,
+    "version": 1795747870,
+    "widths": {
+      "jxl": [
+        50,
+        674,
+        800
+      ],
+      "avif": [
+        50,
+        800
+      ],
+      "webp": [
+        50,
+        707,
+        800
+      ]
+    }
+  },
+  "paulapplegate-com/assets/blog/cover": {
+    "publicId": "assets/blog/cover",
+    "cloudName": "paulapplegate-com",
+    "width": 900,
+    "height": 600,
+    "version": 1788308493,
+    "widths": {
+      "jxl": [
+        50,
+        900
+      ],
+      "avif": [
+        50,
+        900
+      ],
+      "webp": [
+        50,
+        900
+      ]
+    }
+  },
+  "paulapplegate-com/assets/article-cover": {
+    "publicId": "assets/article-cover",
+    "cloudName": "paulapplegate-com",
+    "width": 900,
+    "height": 600,
+    "version": 1788308511,
+    "widths": {
+      "jxl": [
+        50,
+        900
+      ],
+      "avif": [
+        50,
+        900
+      ],
+      "webp": [
+        50,
+        900
       ]
     }
   }

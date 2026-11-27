@@ -19,16 +19,23 @@ Add an MDX file in `src/content/post/<slug>/index.mdx`, following an existing po
 
 ## Images
 
-Use `img: "/assets/journal/photo.jpg"` and `img_alt` for a local post thumbnail. Store the file at that exact path under `public/`. For a Cloudinary thumbnail, use `coverImage` with the asset's public ID, `coverAlt`, and an optional `coverCloudName`.
+Post thumbnails use Cloudinary. Set `coverImage` to the asset's public ID, `coverAlt` to a short description, and `coverCloudName` to `"paulapplegate-com"`. The local `img:` / `img_alt:` workflow is no longer used.
+
+```yaml
+coverImage: "assets/journal/lake"
+coverAlt: "A still lake beneath the mountains"
+coverCloudName: "paulapplegate-com"
+```
 
 To register a Cloudinary asset, set `CLOUDINARY_API_KEY` and `CLOUDINARY_API_SECRET` in your local `.env.local`. Run one of these commands:
 
 ```sh
 pnpm cloudinary:breakpoints src/images/blog/photo.jpg --alt="A description of the photo"
+pnpm cloudinary:breakpoints public/assets/journal/photo.jpg --alt="A description of the photo"
 pnpm cloudinary:breakpoints images/blog/photo --existing --alt="A description of the photo"
 ```
 
-Commit the updated `src/data/cloudinary-images.json` and paste the printed tag into the post. For a registered image, you can also write `![A description](cloudinary:images/blog/photo)`. The Astro build reads the manifest without Cloudinary credentials.
+The upload command derives the public ID by removing the leading `src/` or `public/` and the file extension. Commit the updated `src/data/cloudinary-images.json` and use the printed cover fields for a thumbnail or paste the printed tag into the post body. For a registered image, you can also write `![A description](cloudinary:images/blog/photo)`. The Astro build reads the manifest without Cloudinary credentials.
 
 Cloudinary's analysis supplies suggested widths by format. For article photos, the renderer fills gaps near common display widths. Custom crops use widths suited to their placement and stay within the pixels available in the original. Versions, crops, widths, and formats are encoded in delivery URLs. The analysis command discards its temporary derivatives. Cloudinary generates the delivered variants on request.
 
@@ -45,11 +52,11 @@ OramaJS (`@orama/orama`) powers title, description, tag, and full-text search wi
 - `/elements`: complete component gallery, including buttons, badges, inputs, typography, and icons.
 - `/design`: design documentation and all palette references.
 - Header: original theme picker and dark/light controls, unchanged; branding/navigation and search action adapted.
-- Article layouts, reading progress, table of contents, pagination, RSS, sitemap, optimized image component, and back-to-top control retained.
-- Home and About reuse the button, badge, separator, section-heading, browser frame, and accordion components. Blog thumbnails use the original optimized image component.
+- Article layouts, reading progress, table of contents, pagination, RSS, sitemap, and back-to-top control retained.
+- Home and About reuse the button, badge, separator, section-heading, browser frame, and accordion components. Their photos and blog thumbnails use the shared `CloudinaryImage` component.
 
 ## Site settings
 
-Edit `src/config/site.js` for title and description. Set PUBLIC_SITE_URL when using another domain, then rebuild. Theme settings are in `src/config/themes.js`; journal layout styles are in `src/styles/journal.css`. Original MIT license is retained. The journal uses local and Cloudinary-hosted photos. The original template assets are retained.
+Edit `src/config/site.js` for title and description. Set PUBLIC_SITE_URL when using another domain, then rebuild. Theme settings are in `src/config/themes.js`; journal layout styles are in `src/styles/journal.css`. Original MIT license is retained. The journal uses Cloudinary-hosted photos. The original template assets are retained.
 
 The site is published privately through Sites. `.openai/hosting.json` identifies its hosting project.
